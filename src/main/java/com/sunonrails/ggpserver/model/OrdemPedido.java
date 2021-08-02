@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class OrdemPedido implements Serializable {
@@ -24,10 +25,11 @@ public class OrdemPedido implements Serializable {
             horario_triagem, horario_checkout, horario_finalizado;
 
     private String fonte_pedido;
-    private String status;
     private double troco;
     private String caixa_responsavel;
-    private long status_id;
+
+    private PedidoStatus status;
+
 
     @ManyToMany
     @JoinTable(name = "pedido_produto",
@@ -38,34 +40,33 @@ public class OrdemPedido implements Serializable {
     public OrdemPedido() {
     }
 
-    public OrdemPedido(long id, String forma_pagamento, String data_entrada,
-                       String horario_entrada, String horario_triagem,
-                       String horario_checkout, String horario_finalizado,
-                       long operador_id, long entregador_id, String fonte_pedido,
-                       String status, double troco, String caixa_responsavel,
-                       long status_id) {
+    public OrdemPedido(long id, Cliente cliente, long operador_id, long entregador_id, String forma_pagamento, String data_entrada, String horario_entrada, String horario_triagem, String horario_checkout, String horario_finalizado, String fonte_pedido, double troco, String caixa_responsavel, PedidoStatus status, List<Produto> produtos) {
         this.id = id;
+        this.cliente = cliente;
+        this.operador_id = operador_id;
+        this.entregador_id = entregador_id;
         this.forma_pagamento = forma_pagamento;
         this.data_entrada = data_entrada;
         this.horario_entrada = horario_entrada;
         this.horario_triagem = horario_triagem;
         this.horario_checkout = horario_checkout;
         this.horario_finalizado = horario_finalizado;
-        this.operador_id = operador_id;
-        this.entregador_id = entregador_id;
         this.fonte_pedido = fonte_pedido;
-        this.status = status;
         this.troco = troco;
         this.caixa_responsavel = caixa_responsavel;
-        this.status_id = status_id;
+        this.status = status;
+        this.produtos = produtos;
     }
 
     public long getId() {
         return id;
     }
-
     public void setId(long id) {
         this.id = id;
+    }
+
+    public long getClienteId(){
+        return cliente.getId();
     }
 
     public String getForma_pagamento() {
@@ -75,7 +76,6 @@ public class OrdemPedido implements Serializable {
     public void setForma_pagamento(String forma_pagamento) {
         this.forma_pagamento = forma_pagamento;
     }
-
 
     public String getData_entrada() {
         return data_entrada;
@@ -142,11 +142,11 @@ public class OrdemPedido implements Serializable {
     }
 
     public String getStatus() {
-        return status;
+        return status.name();
     }
 
     public void setStatus(String status) {
-        this.status = status;
+        this.status = PedidoStatus.valueOf(status);
     }
 
     public double getTroco() {
@@ -165,11 +165,17 @@ public class OrdemPedido implements Serializable {
         this.caixa_responsavel = caixa_responsavel;
     }
 
-    public long getStatus_id() {
-        return status_id;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OrdemPedido that = (OrdemPedido) o;
+        return id == that.id && operador_id == that.operador_id && entregador_id == that.entregador_id && Double.compare(that.troco, troco) == 0 && Objects.equals(cliente, that.cliente) && Objects.equals(forma_pagamento, that.forma_pagamento) && Objects.equals(data_entrada, that.data_entrada) && Objects.equals(horario_entrada, that.horario_entrada) && Objects.equals(horario_triagem, that.horario_triagem) && Objects.equals(horario_checkout, that.horario_checkout) && Objects.equals(horario_finalizado, that.horario_finalizado) && Objects.equals(fonte_pedido, that.fonte_pedido) && Objects.equals(caixa_responsavel, that.caixa_responsavel) && status == that.status && Objects.equals(produtos, that.produtos);
     }
 
-    public void setStatus_id(long status_id) {
-        this.status_id = status_id;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, cliente, operador_id, entregador_id, forma_pagamento, data_entrada, horario_entrada, horario_triagem, horario_checkout, horario_finalizado, fonte_pedido, troco, caixa_responsavel, status, produtos);
     }
 }
