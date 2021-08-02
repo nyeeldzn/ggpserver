@@ -1,12 +1,13 @@
 package com.sunonrails.ggpserver.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-public class OrdemPedido {
+public class OrdemPedido implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,7 +24,36 @@ public class OrdemPedido {
     private String caixa_responsavel;
     private long status_id;
 
+    @ManyToMany
+    @JoinTable(name = "pedido_produto",
+               joinColumns = @JoinColumn(name = "produto_id"),
+               inverseJoinColumns = @JoinColumn(name = "pedido_id"))
+    private List<Produto> produtos = new ArrayList<>();
+
     public OrdemPedido() {
+    }
+
+    public OrdemPedido(long id, long cliente_id, String cliente_nome, String end_cliente, String num_cliente, String forma_envio, String forma_pagamento, String forma_subst, String data_entrada, String horario_entrada, String horario_triagem, String horario_checkout, String horario_finalizado, long operador_id, long entregador_id, String fonte_pedido, String status, double troco, String caixa_responsavel, long status_id) {
+        this.id = id;
+        this.cliente_id = cliente_id;
+        this.cliente_nome = cliente_nome;
+        this.end_cliente = end_cliente;
+        this.num_cliente = num_cliente;
+        this.forma_envio = forma_envio;
+        this.forma_pagamento = forma_pagamento;
+        this.forma_subst = forma_subst;
+        this.data_entrada = data_entrada;
+        this.horario_entrada = horario_entrada;
+        this.horario_triagem = horario_triagem;
+        this.horario_checkout = horario_checkout;
+        this.horario_finalizado = horario_finalizado;
+        this.operador_id = operador_id;
+        this.entregador_id = entregador_id;
+        this.fonte_pedido = fonte_pedido;
+        this.status = status;
+        this.troco = troco;
+        this.caixa_responsavel = caixa_responsavel;
+        this.status_id = status_id;
     }
 
     public long getId() {
