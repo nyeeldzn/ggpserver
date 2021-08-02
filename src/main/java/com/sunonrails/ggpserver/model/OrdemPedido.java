@@ -12,12 +12,17 @@ public class OrdemPedido implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private long cliente_id;
-    private String cliente_nome, end_cliente, num_cliente, forma_envio,
-            forma_pagamento, forma_subst, data_entrada, horario_entrada,
-            horario_triagem, horario_checkout, horario_finalizado;
+
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+    private Cliente cliente;
+
     private long operador_id;
     private long entregador_id;
+
+    private String forma_pagamento, data_entrada, horario_entrada,
+            horario_triagem, horario_checkout, horario_finalizado;
+
     private String fonte_pedido;
     private String status;
     private double troco;
@@ -33,15 +38,14 @@ public class OrdemPedido implements Serializable {
     public OrdemPedido() {
     }
 
-    public OrdemPedido(long id, long cliente_id, String cliente_nome, String end_cliente, String num_cliente, String forma_envio, String forma_pagamento, String forma_subst, String data_entrada, String horario_entrada, String horario_triagem, String horario_checkout, String horario_finalizado, long operador_id, long entregador_id, String fonte_pedido, String status, double troco, String caixa_responsavel, long status_id) {
+    public OrdemPedido(long id, String forma_pagamento, String data_entrada,
+                       String horario_entrada, String horario_triagem,
+                       String horario_checkout, String horario_finalizado,
+                       long operador_id, long entregador_id, String fonte_pedido,
+                       String status, double troco, String caixa_responsavel,
+                       long status_id) {
         this.id = id;
-        this.cliente_id = cliente_id;
-        this.cliente_nome = cliente_nome;
-        this.end_cliente = end_cliente;
-        this.num_cliente = num_cliente;
-        this.forma_envio = forma_envio;
         this.forma_pagamento = forma_pagamento;
-        this.forma_subst = forma_subst;
         this.data_entrada = data_entrada;
         this.horario_entrada = horario_entrada;
         this.horario_triagem = horario_triagem;
@@ -64,46 +68,6 @@ public class OrdemPedido implements Serializable {
         this.id = id;
     }
 
-    public long getCliente_id() {
-        return cliente_id;
-    }
-
-    public void setCliente_id(long cliente_id) {
-        this.cliente_id = cliente_id;
-    }
-
-    public String getCliente_nome() {
-        return cliente_nome;
-    }
-
-    public void setCliente_nome(String cliente_nome) {
-        this.cliente_nome = cliente_nome;
-    }
-
-    public String getEnd_cliente() {
-        return end_cliente;
-    }
-
-    public void setEnd_cliente(String end_cliente) {
-        this.end_cliente = end_cliente;
-    }
-
-    public String getNum_cliente() {
-        return num_cliente;
-    }
-
-    public void setNum_cliente(String num_cliente) {
-        this.num_cliente = num_cliente;
-    }
-
-    public String getForma_envio() {
-        return forma_envio;
-    }
-
-    public void setForma_envio(String forma_envio) {
-        this.forma_envio = forma_envio;
-    }
-
     public String getForma_pagamento() {
         return forma_pagamento;
     }
@@ -112,13 +76,6 @@ public class OrdemPedido implements Serializable {
         this.forma_pagamento = forma_pagamento;
     }
 
-    public String getForma_subst() {
-        return forma_subst;
-    }
-
-    public void setForma_subst(String forma_subst) {
-        this.forma_subst = forma_subst;
-    }
 
     public String getData_entrada() {
         return data_entrada;
