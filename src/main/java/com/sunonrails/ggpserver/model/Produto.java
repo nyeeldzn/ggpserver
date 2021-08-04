@@ -24,13 +24,6 @@ public class Produto implements Serializable {
     @ManyToMany(mappedBy = "produtos")
     private List<OrdemPedido> pedidos = new ArrayList<>();
 
-    @JsonIgnore
-    @ManyToMany()
-    @JoinTable(name = "PRODUTO_CATEGORIA",
-                joinColumns = @JoinColumn(name = "produto_id"),
-                inverseJoinColumns = @JoinColumn(name = "categoria_id"))
-    private List<Categoria> categorias = new ArrayList<>();
-
     public Produto() {
     }
 
@@ -61,11 +54,11 @@ public class Produto implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Produto produto = (Produto) o;
-        return Objects.equals(id, produto.id) && nome.equals(produto.nome) && Objects.equals(pedidos, produto.pedidos) && Objects.equals(categorias, produto.categorias);
+        return Objects.equals(id, produto.id) && nome.equals(produto.nome) && Objects.equals(pedidos, produto.pedidos);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nome, pedidos, categorias);
+        return Objects.hash(id, nome, pedidos);
     }
 }
