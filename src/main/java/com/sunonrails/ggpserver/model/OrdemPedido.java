@@ -25,7 +25,6 @@ public class OrdemPedido implements Serializable {
             horario_triagem, horario_checkout, horario_finalizado;
 
     private String fonte_pedido;
-    private double troco;
     private String caixa_responsavel;
 
     private PedidoStatus status;
@@ -52,7 +51,6 @@ public class OrdemPedido implements Serializable {
         this.horario_checkout = horario_checkout;
         this.horario_finalizado = horario_finalizado;
         this.fonte_pedido = fonte_pedido;
-        this.troco = troco;
         this.caixa_responsavel = caixa_responsavel;
         this.status = status;
         this.produtos = produtos;
@@ -149,14 +147,6 @@ public class OrdemPedido implements Serializable {
         this.status = PedidoStatus.valueOf(status);
     }
 
-    public double getTroco() {
-        return troco;
-    }
-
-    public void setTroco(double troco) {
-        this.troco = troco;
-    }
-
     public String getCaixa_responsavel() {
         return caixa_responsavel;
     }
@@ -171,11 +161,11 @@ public class OrdemPedido implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OrdemPedido that = (OrdemPedido) o;
-        return id == that.id && operador_id == that.operador_id && entregador_id == that.entregador_id && Double.compare(that.troco, troco) == 0 && Objects.equals(cliente, that.cliente) && Objects.equals(forma_pagamento, that.forma_pagamento) && Objects.equals(data_entrada, that.data_entrada) && Objects.equals(horario_entrada, that.horario_entrada) && Objects.equals(horario_triagem, that.horario_triagem) && Objects.equals(horario_checkout, that.horario_checkout) && Objects.equals(horario_finalizado, that.horario_finalizado) && Objects.equals(fonte_pedido, that.fonte_pedido) && Objects.equals(caixa_responsavel, that.caixa_responsavel) && status == that.status && Objects.equals(produtos, that.produtos);
+        return id == that.id && operador_id == that.operador_id && entregador_id == that.entregador_id && Objects.equals(cliente, that.cliente) && Objects.equals(forma_pagamento, that.forma_pagamento) && Objects.equals(data_entrada, that.data_entrada) && Objects.equals(horario_entrada, that.horario_entrada) && Objects.equals(horario_triagem, that.horario_triagem) && Objects.equals(horario_checkout, that.horario_checkout) && Objects.equals(horario_finalizado, that.horario_finalizado) && Objects.equals(fonte_pedido, that.fonte_pedido) && Objects.equals(caixa_responsavel, that.caixa_responsavel) && status == that.status && Objects.equals(produtos, that.produtos);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, cliente, operador_id, entregador_id, forma_pagamento, data_entrada, horario_entrada, horario_triagem, horario_checkout, horario_finalizado, fonte_pedido, troco, caixa_responsavel, status, produtos);
+        return Objects.hash(id, cliente, operador_id, entregador_id, forma_pagamento, data_entrada, horario_entrada, horario_triagem, horario_checkout, horario_finalizado, fonte_pedido, caixa_responsavel, status, produtos);
     }
 }
