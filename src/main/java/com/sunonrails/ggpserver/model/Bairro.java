@@ -16,7 +16,7 @@ public class Bairro {
     @NonNull
     private String nome;
 
-    @OneToMany(mappedBy = "bairro")
+    @OneToMany(mappedBy = "bairro", cascade = CascadeType.ALL)
     private List<Cliente> clientes;
 
     public Bairro () {}

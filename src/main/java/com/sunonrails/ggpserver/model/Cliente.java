@@ -27,7 +27,7 @@ public class Cliente {
     @NonNull
     private String telefone;
 
-    @OneToMany(mappedBy = "cliente")
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<OrdemPedido> pedidos = new ArrayList<>();
 
     public Cliente(){}

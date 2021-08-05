@@ -73,8 +73,12 @@ public class OrdemPedido implements Serializable {
         this.id = id;
     }
 
-    public long getClienteId(){
-        return cliente.getId();
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public String getForma_pagamento() {
