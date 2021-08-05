@@ -1,13 +1,7 @@
 package com.sunonrails.ggpserver;
 
-import com.sunonrails.ggpserver.model.Bairro;
-import com.sunonrails.ggpserver.model.Cliente;
-import com.sunonrails.ggpserver.model.OrdemPedido;
-import com.sunonrails.ggpserver.model.Produto;
-import com.sunonrails.ggpserver.service.BairroService;
-import com.sunonrails.ggpserver.service.ClienteService;
-import com.sunonrails.ggpserver.service.OrdemPedidoService;
-import com.sunonrails.ggpserver.service.ProdutoService;
+import com.sunonrails.ggpserver.model.*;
+import com.sunonrails.ggpserver.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -28,6 +22,9 @@ public class GgpServerApplication implements CommandLineRunner {
 
 	@Autowired
 	private BairroService bairroService;
+
+	@Autowired
+	private UsuarioService usuarioService;
 
 	@Autowired
 	private OrdemPedidoService ordemPedidoService;
@@ -66,9 +63,15 @@ public class GgpServerApplication implements CommandLineRunner {
 
 		clienteService.insertList(Arrays.asList(cli1, cli2, cli3, cli4));
 
+		//Instanciando Usuario de Teste
+
+		Usuario usr1 = new Usuario(null, "daniel", 1);
+
+		usuarioService.insert(usr1);
+
 		//Instanciando pedidos de Teste
 
-		OrdemPedido ped1 = new OrdemPedido(null,cli1,1,1,
+		OrdemPedido ped1 = new OrdemPedido(null,cli1,usr1,"William",
 				"DINHEIRO","03-08-2021","18:00",
 				"18:05","18:10","18:15",
 				"WHATSAPP","DAYANE",1,Arrays.asList(prod1, prod2,prod3));

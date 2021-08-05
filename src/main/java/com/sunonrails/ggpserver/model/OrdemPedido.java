@@ -18,8 +18,11 @@ public class OrdemPedido implements Serializable {
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
-    private long operador_id;
-    private long entregador_id;
+    @ManyToOne
+    @JoinColumn(name = "operador_id")
+    private Usuario operador;
+
+    private String entregador;
 
     private String forma_pagamento, data_entrada, horario_entrada,
             horario_triagem, horario_checkout, horario_finalizado;
@@ -44,15 +47,14 @@ public class OrdemPedido implements Serializable {
     public OrdemPedido() {
     }
 
-    public OrdemPedido(Long id, Cliente cliente, long operador_id, long entregador_id,
-                       String forma_pagamento, String data_entrada, String horario_entrada,
-                       String horario_triagem, String horario_checkout, String horario_finalizado,
-                       String fonte_pedido, String caixa_responsavel,
-                       int status, List<Produto> produtos) {
+    public OrdemPedido(Long id, Cliente cliente, Usuario operador,String entregador, String forma_pagamento,
+                       String data_entrada, String horario_entrada, String horario_triagem, String horario_checkout,
+                       String horario_finalizado, String fonte_pedido, String caixa_responsavel, int status,
+                       List<Produto> produtos) {
         this.id = id;
         this.cliente = cliente;
-        this.operador_id = operador_id;
-        this.entregador_id = entregador_id;
+        this.operador = operador;
+        this.entregador = entregador;
         this.forma_pagamento = forma_pagamento;
         this.data_entrada = data_entrada;
         this.horario_entrada = horario_entrada;
@@ -129,20 +131,20 @@ public class OrdemPedido implements Serializable {
         this.horario_finalizado = horario_finalizado;
     }
 
-    public long getOperador_id() {
-        return operador_id;
+    public Usuario getOperador() {
+        return operador;
     }
 
-    public void setOperador_id(long operador_id) {
-        this.operador_id = operador_id;
+    public void setOperador(Usuario operador) {
+        this.operador = operador;
     }
 
-    public long getEntregador_id() {
-        return entregador_id;
+    public String getEntregador() {
+        return entregador;
     }
 
-    public void setEntregador_id(long entregador_id) {
-        this.entregador_id = entregador_id;
+    public void setEntregador(String entregador) {
+        this.entregador = entregador;
     }
 
     public String getFonte_pedido() {
@@ -183,11 +185,11 @@ public class OrdemPedido implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OrdemPedido that = (OrdemPedido) o;
-        return id == that.id && operador_id == that.operador_id && entregador_id == that.entregador_id && Objects.equals(cliente, that.cliente) && Objects.equals(forma_pagamento, that.forma_pagamento) && Objects.equals(data_entrada, that.data_entrada) && Objects.equals(horario_entrada, that.horario_entrada) && Objects.equals(horario_triagem, that.horario_triagem) && Objects.equals(horario_checkout, that.horario_checkout) && Objects.equals(horario_finalizado, that.horario_finalizado) && Objects.equals(fonte_pedido, that.fonte_pedido) && Objects.equals(caixa_responsavel, that.caixa_responsavel) && status == that.status && Objects.equals(produtos, that.produtos);
+        return status == that.status && Objects.equals(id, that.id) && Objects.equals(cliente, that.cliente) && Objects.equals(operador, that.operador) && Objects.equals(entregador, that.entregador) && Objects.equals(forma_pagamento, that.forma_pagamento) && Objects.equals(data_entrada, that.data_entrada) && Objects.equals(horario_entrada, that.horario_entrada) && Objects.equals(horario_triagem, that.horario_triagem) && Objects.equals(horario_checkout, that.horario_checkout) && Objects.equals(horario_finalizado, that.horario_finalizado) && Objects.equals(fonte_pedido, that.fonte_pedido) && Objects.equals(caixa_responsavel, that.caixa_responsavel) && Objects.equals(produtos, that.produtos);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, cliente, operador_id, entregador_id, forma_pagamento, data_entrada, horario_entrada, horario_triagem, horario_checkout, horario_finalizado, fonte_pedido, caixa_responsavel, status, produtos);
+        return Objects.hash(id, cliente, operador, entregador, forma_pagamento, data_entrada, horario_entrada, horario_triagem, horario_checkout, horario_finalizado, fonte_pedido, caixa_responsavel, status, produtos);
     }
 }
