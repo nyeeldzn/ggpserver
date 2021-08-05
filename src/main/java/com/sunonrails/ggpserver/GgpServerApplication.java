@@ -1,9 +1,10 @@
 package com.sunonrails.ggpserver;
 
+import com.sunonrails.ggpserver.model.Bairro;
 import com.sunonrails.ggpserver.model.Cliente;
 import com.sunonrails.ggpserver.model.OrdemPedido;
 import com.sunonrails.ggpserver.model.Produto;
-import com.sunonrails.ggpserver.repositories.OrdemPedidoRepository;
+import com.sunonrails.ggpserver.service.BairroService;
 import com.sunonrails.ggpserver.service.ClienteService;
 import com.sunonrails.ggpserver.service.OrdemPedidoService;
 import com.sunonrails.ggpserver.service.ProdutoService;
@@ -26,6 +27,9 @@ public class GgpServerApplication implements CommandLineRunner {
 	private ClienteService clienteService;
 
 	@Autowired
+	private BairroService bairroService;
+
+	@Autowired
 	private OrdemPedidoService ordemPedidoService;
 
 	public static void main(String[] args) {
@@ -45,12 +49,20 @@ public class GgpServerApplication implements CommandLineRunner {
 		produtoService.insert(prod2);
 		produtoService.insert(prod3);
 
+		//Instanciando Bairros de Teste
+
+		Bairro b1 = new Bairro(null, "Sao Vicente");
+		Bairro b2 = new Bairro(null, "Alto Bela Vista");
+
+		bairroService.insert(b1);
+		bairroService.insert(b2);
+
 		//Instanciando Clientes de teste
 
-		Cliente cli1 = new Cliente(null,"Daniel","Rua Maria Pereira de Resende, 45","Sao Vicente","34997893234");
-		Cliente cli2 = new Cliente(null,"Floriza","Rua Nossa Senhora da Abadia","Alto Bela Vista","SEM NUMERO");
-		Cliente cli3 = new Cliente(null,"Guilherme","Rua das Auracarias","Sao Vicente","34988790928");
-		Cliente cli4 = new Cliente(null,"Gustavo","Avenida Primeiro de Setembro","Alto Bela Vista","SEM NUMERO");
+		Cliente cli1 = new Cliente(null,"Daniel","Rua Maria Pereira de Resende, 45",b1,"34997893234");
+		Cliente cli2 = new Cliente(null,"Floriza","Rua Nossa Senhora da Abadia",b2,"SEM NUMERO");
+		Cliente cli3 = new Cliente(null,"Guilherme","Rua das Auracarias",b1,"34988790928");
+		Cliente cli4 = new Cliente(null,"Gustavo","Avenida Primeiro de Setembro",b2,"SEM NUMERO");
 
 		clienteService.insertList(Arrays.asList(cli1, cli2, cli3, cli4));
 

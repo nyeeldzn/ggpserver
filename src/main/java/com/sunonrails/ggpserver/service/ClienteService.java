@@ -1,6 +1,5 @@
 package com.sunonrails.ggpserver.service;
 
-import ch.qos.logback.core.net.server.Client;
 import com.sunonrails.ggpserver.exceptions.ObjectNotFoundException;
 import com.sunonrails.ggpserver.model.Cliente;
 import com.sunonrails.ggpserver.repositories.ClienteRepository;
@@ -8,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 

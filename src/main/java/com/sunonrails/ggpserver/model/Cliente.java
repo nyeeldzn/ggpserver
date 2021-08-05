@@ -20,7 +20,9 @@ public class Cliente {
     private String endereco;
 
     @NonNull
-    private String bairro;
+    @ManyToOne
+    @JoinColumn(name = "bairro_id")
+    private Bairro bairro;
 
     @NonNull
     private String telefone;
@@ -30,14 +32,13 @@ public class Cliente {
 
     public Cliente(){}
 
-    public Cliente(@NonNull Long id,@NonNull String nome, @NonNull String endereco, @NonNull String bairro, @NonNull String telefone) {
-        this.id= id;
+    public Cliente(Long id, @NonNull String nome, @NonNull String endereco, @NonNull Bairro bairro, @NonNull String telefone) {
+        this.id = id;
         this.nome = nome;
         this.endereco = endereco;
         this.bairro = bairro;
         this.telefone = telefone;
     }
-
 
     public Long getId() {
         return id;
@@ -66,11 +67,11 @@ public class Cliente {
     }
 
     @NonNull
-    public String getBairro() {
+    public Bairro getBairro() {
         return bairro;
     }
 
-    public void setBairro(@NonNull String bairro) {
+    public void setBairro(@NonNull Bairro bairro) {
         this.bairro = bairro;
     }
 
