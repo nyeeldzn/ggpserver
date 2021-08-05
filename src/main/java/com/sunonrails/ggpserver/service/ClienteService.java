@@ -7,6 +7,8 @@ import com.sunonrails.ggpserver.repositories.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +27,14 @@ public class ClienteService {
 
     public List<Cliente> findAll(){
         return repo.findAll();
+    }
+
+    public List<Cliente> insertList(List<Cliente> list){
+        List<Cliente> clientSaveCheck = new ArrayList<>();
+        for(int i = 0; i<list.size(); i++){
+            clientSaveCheck.add(repo.save(list.get(i)));
+        }
+        return clientSaveCheck;
     }
 
     public Cliente insert (Cliente obj) {

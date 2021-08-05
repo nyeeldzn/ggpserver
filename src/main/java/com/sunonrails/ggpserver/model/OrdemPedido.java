@@ -11,8 +11,8 @@ public class OrdemPedido implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "cliente_id")
@@ -27,7 +27,12 @@ public class OrdemPedido implements Serializable {
     private String fonte_pedido;
     private String caixa_responsavel;
 
-    private PedidoStatus status;
+    private int status;
+    //1 -- pendende
+    //2 -- triagem
+    //3 -- chekout
+    //4 -- enviado
+    //5 -- finalizado
 
 
     @ManyToMany
@@ -39,7 +44,11 @@ public class OrdemPedido implements Serializable {
     public OrdemPedido() {
     }
 
-    public OrdemPedido(long id, Cliente cliente, long operador_id, long entregador_id, String forma_pagamento, String data_entrada, String horario_entrada, String horario_triagem, String horario_checkout, String horario_finalizado, String fonte_pedido, double troco, String caixa_responsavel, PedidoStatus status, List<Produto> produtos) {
+    public OrdemPedido(Long id, Cliente cliente, long operador_id, long entregador_id,
+                       String forma_pagamento, String data_entrada, String horario_entrada,
+                       String horario_triagem, String horario_checkout, String horario_finalizado,
+                       String fonte_pedido, String caixa_responsavel,
+                       int status, List<Produto> produtos) {
         this.id = id;
         this.cliente = cliente;
         this.operador_id = operador_id;
@@ -56,10 +65,11 @@ public class OrdemPedido implements Serializable {
         this.produtos = produtos;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
-    public void setId(long id) {
+
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -139,12 +149,20 @@ public class OrdemPedido implements Serializable {
         this.fonte_pedido = fonte_pedido;
     }
 
-    public String getStatus() {
-        return status.name();
+    public int getStatus() {
+        return status;
     }
 
-    public void setStatus(String status) {
-        this.status = PedidoStatus.valueOf(status);
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public List<Produto> getProdutos() {
+        return produtos;
+    }
+
+    public void setProdutos(List<Produto> produtos) {
+        this.produtos = produtos;
     }
 
     public String getCaixa_responsavel() {
