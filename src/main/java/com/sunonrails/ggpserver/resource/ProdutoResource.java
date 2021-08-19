@@ -32,4 +32,14 @@ public class ProdutoResource {
         return produtoService.insert(produto);
     }
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public void delete(@PathVariable Long id){
+       produtoService.deleteById(id);
+    }
+
+    @PutMapping
+    public void update(@RequestBody Produto produto){
+        produtoService.update(produto);
+    }
+
 }
