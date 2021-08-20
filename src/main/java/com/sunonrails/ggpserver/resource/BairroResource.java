@@ -1,7 +1,8 @@
 package com.sunonrails.ggpserver.resource;
 
+import com.sunonrails.ggpserver.model.Bairro;
 import com.sunonrails.ggpserver.model.Cliente;
-import com.sunonrails.ggpserver.model.Produto;
+import com.sunonrails.ggpserver.service.BairroService;
 import com.sunonrails.ggpserver.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -9,25 +10,25 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/clientes")
-public class ClienteResource {
+@RequestMapping("/bairros")
+public class BairroResource {
 
     @Autowired
-    private ClienteService service;
+    private BairroService service;
 
     @GetMapping
-    public List<Cliente> findAll(){
+    public List<Bairro> findAll(){
         return service.findAll();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Cliente findById(@PathVariable Long id){
+    public Bairro findById(@PathVariable Long id){
         return service.find(id);
     }
 
     @PostMapping
-    public Cliente insert(@RequestBody Cliente cliente) {
-            return service.insert(cliente);
+    public Bairro insert(@RequestBody Bairro bairro) {
+            return service.insert(bairro);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
@@ -36,8 +37,8 @@ public class ClienteResource {
     }
 
     @PutMapping
-    public void update(@RequestBody Cliente cliente){
-        service.update(cliente);
+    public void update(@RequestBody Bairro bairro){
+        service.update(bairro);
     }
 
 }

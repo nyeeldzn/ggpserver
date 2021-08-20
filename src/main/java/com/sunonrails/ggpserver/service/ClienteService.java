@@ -2,6 +2,7 @@ package com.sunonrails.ggpserver.service;
 
 import com.sunonrails.ggpserver.exceptions.ObjectNotFoundException;
 import com.sunonrails.ggpserver.model.Cliente;
+import com.sunonrails.ggpserver.model.Produto;
 import com.sunonrails.ggpserver.repositories.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,5 +45,19 @@ public class ClienteService {
     public void deleteById(Long id) {
         repo.deleteById(id);
     }
+
+    public Cliente update(Cliente cli){
+        Cliente newObj = find(cli.getId());
+        updateData(newObj, cli);
+        return repo.save(newObj);
+    }
+
+    private void updateData(Cliente newObj, Cliente obj){
+        newObj.setNome(obj.getNome());
+        newObj.setBairro(obj.getBairro());
+        newObj.setEndereco(obj.getEndereco());
+        newObj.setTelefone(obj.getTelefone());
+    }
+
 
 }

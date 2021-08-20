@@ -2,6 +2,7 @@ package com.sunonrails.ggpserver.service;
 
 import com.sunonrails.ggpserver.exceptions.ObjectNotFoundException;
 import com.sunonrails.ggpserver.model.Bairro;
+import com.sunonrails.ggpserver.model.Produto;
 import com.sunonrails.ggpserver.repositories.BairroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,5 +35,13 @@ public class BairroService {
         repo.deleteById(id);
     }
 
+    public Bairro update(Bairro bairro){
+        Bairro newObj = find(bairro.getId());
+        updateData(newObj, bairro);
+        return repo.save(newObj);
+    }
 
+    private void updateData(Bairro newObj, Bairro obj){
+        newObj.setNome(obj.getNome());
+    }
 }
