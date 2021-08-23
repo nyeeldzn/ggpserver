@@ -84,9 +84,13 @@ public class GgpServerApplication implements CommandLineRunner {
 		time = fTime.parse(sTime);
 
 		OrdemPedido ped1 = new OrdemPedido(null,cli1,usr1,"William",
-				"DINHEIRO",date,time,
-				time,time,time,
+				"DINHEIRO",
 				"WHATSAPP","DAYANE",1);
+		ped1.setEntradaDate(ped1.toDate(sDate));
+		ped1.setEntradaHora(ped1.toTime(sTime));
+		ped1.setTriagemHora(ped1.toTime(sTime));
+		ped1.setCheckoutHora(ped1.toTime(sTime));
+		ped1.setFinalizadoHora(ped1.toTime(sTime));
 		ped1.setProdutos(Arrays.asList(prod1, prod2,prod3));
 		ordemPedidoService.insert(ped1);
 	}

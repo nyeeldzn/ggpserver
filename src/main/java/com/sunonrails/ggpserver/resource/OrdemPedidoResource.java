@@ -1,5 +1,6 @@
 package com.sunonrails.ggpserver.resource;
 
+import com.sunonrails.ggpserver.dto.OrdemPedidoDTO;
 import com.sunonrails.ggpserver.model.OrdemPedido;
 import com.sunonrails.ggpserver.repositories.OrdemPedidoRepository;
 import com.sunonrails.ggpserver.service.OrdemPedidoService;
@@ -26,7 +27,15 @@ public class OrdemPedidoResource {
     }
 
     @PostMapping
-    public OrdemPedido insert(@RequestBody OrdemPedido pedido){
+    public OrdemPedido insert(@RequestBody OrdemPedidoDTO pedidoDTO){
+        OrdemPedido pedido = new OrdemPedido(pedidoDTO.getId(), pedidoDTO.getCliente(), pedidoDTO.getOperador(),
+                pedidoDTO.getEntregador(), pedidoDTO.getForma_pagamento(), pedidoDTO.getFonte_pedido(),
+                pedidoDTO.getCaixa_responsavel(), pedidoDTO.getStatus());
+        pedido.setEntradaDate(pedido.toDate(pedidoDTO.getEntradaDate()));
+        pedido.setEntradaHora(pedido.toTime(pedidoDTO.getEntradaHora()));
+        pedido.setTriagemHora(pedido.toTime(pedidoDTO.getTriagemHora()));
+        pedido.setCheckoutHora(pedido.toTime(pedidoDTO.getCheckoutHora()));
+        pedido.setFinalizadoHora(pedido.toTime(pedidoDTO.getFinalizadoHora()));
         return service.insert(pedido);
     }
 
