@@ -8,7 +8,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 
 @EnableAutoConfiguration(exclude = {org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class})
 @SpringBootApplication
@@ -70,11 +72,22 @@ public class GgpServerApplication implements CommandLineRunner {
 		usuarioService.insert(usr1);
 
 		//Instanciando pedidos de Teste
+		Date date;
+		Date time;
+		SimpleDateFormat fDate = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat fTime = new SimpleDateFormat("HH:mm:ss");
+
+		String sDate = "2021-12-31";
+		String sTime = "10:11:33";
+
+		date = fDate.parse(sDate);
+		time = fTime.parse(sTime);
 
 		OrdemPedido ped1 = new OrdemPedido(null,cli1,usr1,"William",
-				"DINHEIRO","03-08-2021","18:00",
-				"18:05","18:10","18:15",
-				"WHATSAPP","DAYANE",1,Arrays.asList(prod1, prod2,prod3));
+				"DINHEIRO",date,time,
+				time,time,time,
+				"WHATSAPP","DAYANE",1);
+		ped1.setProdutos(Arrays.asList(prod1, prod2,prod3));
 		ordemPedidoService.insert(ped1);
 	}
 }
