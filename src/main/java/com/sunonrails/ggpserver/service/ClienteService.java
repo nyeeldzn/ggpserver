@@ -25,6 +25,15 @@ public class ClienteService {
         ));
     }
 
+    public Cliente findByNome(String nome){
+        Cliente cli = repo.findByNome(nome);
+        if(cli.getId() != null && !(cli.getNome().equals(""))){
+            return cli;
+        }else{
+            throw new ObjectNotFoundException("Cliente de nome: " + nome + " nao encontrado!");
+        }
+    }
+
     public List<Cliente> findAll(){
         return repo.findAll();
     }

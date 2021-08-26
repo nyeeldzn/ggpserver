@@ -25,6 +25,11 @@ public class ClienteResource {
         return service.find(id);
     }
 
+    @RequestMapping(value = "/buscaPorNome/{nome}", method = RequestMethod.GET)
+    public Cliente findById(@PathVariable String nome){
+        return service.findByNome(nome.toUpperCase());
+    }
+
     @PostMapping
     public Cliente insert(@RequestBody Cliente cliente) {
             return service.insert(cliente);

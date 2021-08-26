@@ -58,10 +58,10 @@ public class GgpServerApplication implements CommandLineRunner {
 
 		//Instanciando Clientes de teste
 
-		Cliente cli1 = new Cliente(null,"Daniel","Rua Maria Pereira de Resende, 45",b1,"34997893234","25-03-2021");
-		Cliente cli2 = new Cliente(null,"Floriza","Rua Nossa Senhora da Abadia",b2,"SEM NUMERO","30-05-2021");
-		Cliente cli3 = new Cliente(null,"Guilherme","Rua das Auracarias",b1,"34988790928","08-12-2020");
-		Cliente cli4 = new Cliente(null,"Gustavo","Avenida Primeiro de Setembro",b2,"SEM NUMERO","01-08-2021");
+		Cliente cli1 = new Cliente(null,"DANIEL","Rua Maria Pereira de Resende, 45",b1,"34997893234","25-03-2021");
+		Cliente cli2 = new Cliente(null,"FLORIZA","Rua Nossa Senhora da Abadia",b2,"SEM NUMERO","30-05-2021");
+		Cliente cli3 = new Cliente(null,"GUILHERME","Rua das Auracarias",b1,"34988790928","08-12-2020");
+		Cliente cli4 = new Cliente(null,"GUSTAVO","Avenida Primeiro de Setembro",b2,"SEM NUMERO","01-08-2021");
 
 		clienteService.insertList(Arrays.asList(cli1, cli2, cli3, cli4));
 
