@@ -20,6 +20,9 @@ public class GgpServerApplication implements CommandLineRunner {
 	private ProdutoService produtoService;
 
 	@Autowired
+	private PedidoProdutoService pedidoProdutoService;
+
+	@Autowired
 	private ClienteService clienteService;
 
 	@Autowired
@@ -44,9 +47,18 @@ public class GgpServerApplication implements CommandLineRunner {
 		Produto prod3 = new Produto(null, "Sabao em Po OMO");
 		Produto prod2 = new Produto(null, "Salgadinho Doritos");
 
+		PedidoProduto pedprod1 = new PedidoProduto(null, "Veja Multiuso");
+		PedidoProduto pedprod3 = new PedidoProduto(null, "Sabao em Po OMO");
+		PedidoProduto pedprod2 = new PedidoProduto(null, "Salgadinho Doritos");
+
 		produtoService.insert(prod1);
 		produtoService.insert(prod2);
 		produtoService.insert(prod3);
+
+		pedidoProdutoService.insert(pedprod1);
+		pedidoProdutoService.insert(pedprod2);
+		pedidoProdutoService.insert(pedprod3);
+
 
 		//Instanciando Bairros de Teste
 

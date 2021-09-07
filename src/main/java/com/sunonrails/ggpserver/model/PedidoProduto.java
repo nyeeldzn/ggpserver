@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Produto implements Serializable {
+public class PedidoProduto implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -20,16 +20,11 @@ public class Produto implements Serializable {
     @NonNull
     private String nome;
 
-    /*@JsonIgnore
+    @JsonIgnore
     @ManyToMany(mappedBy = "produtos")
     private List<OrdemPedido> pedidos = new ArrayList<>();
 
-
-     */
-    public Produto() {
-    }
-
-    public Produto(Long id, @NonNull String nome) {
+    public PedidoProduto(Long id, @NonNull String nome) {
         this.id = id;
         this.nome = nome;
     }
@@ -51,16 +46,24 @@ public class Produto implements Serializable {
         this.nome = nome;
     }
 
+    public List<OrdemPedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(List<OrdemPedido> pedidos) {
+        this.pedidos = pedidos;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Produto produto = (Produto) o;
-        return Objects.equals(id, produto.id) && nome.equals(produto.nome);
+        PedidoProduto that = (PedidoProduto) o;
+        return Objects.equals(id, that.id) && nome.equals(that.nome) && Objects.equals(pedidos, that.pedidos);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nome);
+        return Objects.hash(id, nome, pedidos);
     }
 }
