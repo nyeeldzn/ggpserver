@@ -1,6 +1,10 @@
 package com.sunonrails.ggpserver.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import javax.validation.Valid;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -10,6 +14,8 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Table(name = "pedidos")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class OrdemPedido implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -55,11 +61,18 @@ public class OrdemPedido implements Serializable {
     //5 -- finalizado
 
 
+    /*
     @ManyToMany
     @JoinTable(name = "pedido_produto",
                joinColumns = @JoinColumn(name = "produto_id"),
                inverseJoinColumns = @JoinColumn(name = "pedido_id"))
     private List<Produto> produtos = new ArrayList<>();
+
+     */
+    @JsonManagedReference
+    @OneToMany(mappedBy = "pedido")
+    @Valid
+    private List<OrderProduct> orderProducts = new ArrayList<>();
 
     public OrdemPedido() {
     }
@@ -74,6 +87,11 @@ public class OrdemPedido implements Serializable {
         this.fonte_pedido = fonte_pedido;
         this.caixa_responsavel = caixa_responsavel;
         this.status = status;
+    }
+
+    @Transient
+    public int getNumberOfProducts() {
+        return this.orderProducts.size();
     }
 
     public Date toDate(String sDate){
@@ -154,12 +172,12 @@ public class OrdemPedido implements Serializable {
         this.status = status;
     }
 
-    public List<Produto> getProdutos() {
-        return produtos;
+    public List<OrderProduct> getOrderProducts() {
+        return orderProducts;
     }
 
-    public void setProdutos(List<Produto> produtos) {
-        this.produtos = produtos;
+    public void setOrderProducts(List<OrderProduct> orderProducts) {
+        this.orderProducts = orderProducts;
     }
 
     public String getCaixa_responsavel() {

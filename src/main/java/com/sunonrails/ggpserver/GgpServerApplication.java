@@ -20,9 +20,6 @@ public class GgpServerApplication implements CommandLineRunner {
 	private ProdutoService produtoService;
 
 	@Autowired
-	private PedidoProdutoService pedidoProdutoService;
-
-	@Autowired
 	private ClienteService clienteService;
 
 	@Autowired
@@ -33,6 +30,9 @@ public class GgpServerApplication implements CommandLineRunner {
 
 	@Autowired
 	private OrdemPedidoService ordemPedidoService;
+
+	@Autowired
+	private OrderProductService orderProductService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(GgpServerApplication.class, args);
@@ -47,18 +47,27 @@ public class GgpServerApplication implements CommandLineRunner {
 		Produto prod3 = new Produto(null, "Sabao em Po OMO");
 		Produto prod2 = new Produto(null, "Salgadinho Doritos");
 
+
+
+
+		/*
 		PedidoProduto pedprod1 = new PedidoProduto(null, "Veja Multiuso");
 		PedidoProduto pedprod3 = new PedidoProduto(null, "Sabao em Po OMO");
 		PedidoProduto pedprod2 = new PedidoProduto(null, "Salgadinho Doritos");
 
+
+		 */
 		produtoService.insert(prod1);
 		produtoService.insert(prod2);
 		produtoService.insert(prod3);
 
+		/*
 		pedidoProdutoService.insert(pedprod1);
 		pedidoProdutoService.insert(pedprod2);
 		pedidoProdutoService.insert(pedprod3);
 
+
+		 */
 
 		//Instanciando Bairros de Teste
 
@@ -99,12 +108,23 @@ public class GgpServerApplication implements CommandLineRunner {
 		OrdemPedido ped1 = new OrdemPedido(null,cli1,usr1,"William",
 				"DINHEIRO",
 				"WHATSAPP","DAYANE",1);
+
+		OrderProduct list1 = new OrderProduct(ped1, prod1, 3);
+		OrderProduct list2 = new OrderProduct(ped1, prod2, 1);
+		OrderProduct list3 = new OrderProduct(ped1, prod3, 4);
+
 		ped1.setEntradaDate(ped1.toDate(sDate));
 		ped1.setEntradaHora(ped1.toTime(sTime));
 		ped1.setTriagemHora(ped1.toTime(sTime));
 		ped1.setCheckoutHora(ped1.toTime(sTime));
 		ped1.setFinalizadoHora(ped1.toTime(sTime));
-		ped1.setProdutos(Arrays.asList(prod1, prod2,prod3));
+		ped1.setOrderProducts(Arrays.asList(list1, list2,list3));
+
+
 		ordemPedidoService.insert(ped1);
+		orderProductService.insert(list1);
+		orderProductService.insert(list2);
+		orderProductService.insert(list3);
+
 	}
 }
