@@ -15,34 +15,39 @@ import java.util.Optional;
 public class ProdutoService {
 
     @Autowired
-    ProdutoRepository produtoRepository;
+    ProdutoRepository repo;
 
     public Produto findById(Long id){
-        Optional<Produto> obj = produtoRepository.findById(id);
+        Optional<Produto> obj = repo.findById(id);
         return obj.orElseThrow( () -> new ObjectNotFoundException(
                 "Objeto nao encontrado! Id: " + id + " Categoria: " + Produto.class.getName()
         ));
     }
 
+    public List<Produto> findAllByName(String nome) {
+        List<Produto> produtos = repo.findProdutoByNome(nome);
+        return produtos;
+    }
+
     public List<Produto> findAll(){
-        return produtoRepository.findAll();
+        return repo.findAll();
     }
 
     public Produto insert(Produto produto){
         produto.setId(null);
-        return produtoRepository.save(produto);
+        return repo.save(produto);
     }
 
     public Produto update(Produto produto){
         Produto newObj = findById(produto.getId());
         updateData(newObj, produto);
-        return produtoRepository.save(newObj);
+        return repo.save(newObj);
     }
 
     public void deleteById (Long id) {
         findById(id);
         try{
-            produtoRepository.deleteById(id);
+            repo.deleteById(id);
         }catch (DataIntegrityViolationException e){
             throw new DataIntegrityException("Nao e possivel excluir um produto que esta em pedidos");
         }

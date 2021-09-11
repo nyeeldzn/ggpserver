@@ -1,7 +1,7 @@
 package com.sunonrails.ggpserver.resource;
 
+import com.sunonrails.ggpserver.model.Cliente;
 import com.sunonrails.ggpserver.model.Produto;
-import com.sunonrails.ggpserver.repositories.ProdutoRepository;
 import com.sunonrails.ggpserver.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,32 +14,37 @@ import java.util.List;
 public class ProdutoResource {
 
     @Autowired
-    private ProdutoService produtoService;
+    private ProdutoService service;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Produto> find(@PathVariable Long id){
-        Produto obj = produtoService.findById(id);
+        Produto obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
+    }
+
+    @RequestMapping(value = "/buscaPorNome", method = RequestMethod.POST)
+    public List<Produto> findClientesByNome(@RequestBody Produto produto){
+        return service.findAllByName(produto.getNome());
     }
 
     @GetMapping
     public List<Produto> findAll(){
-        return produtoService.findAll();
+        return service.findAll();
     }
 
     @PostMapping
     public Produto insert(@RequestBody Produto produto){
-        return produtoService.insert(produto);
+        return service.insert(produto);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable Long id){
-       produtoService.deleteById(id);
+       service.deleteById(id);
     }
 
     @PutMapping
     public void update(@RequestBody Produto produto){
-        produtoService.update(produto);
+        service.update(produto);
     }
 
 }
