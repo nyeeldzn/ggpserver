@@ -30,6 +30,10 @@ public class OrderProductService {
         return repo.findAll();
     }
 
+    public List<OrderProduct> insertList (List<OrderProduct> list) {
+        return repo.saveAll(list);
+    }
+
     public OrderProduct insert (OrderProduct obj) {
         return repo.save(obj);
     }

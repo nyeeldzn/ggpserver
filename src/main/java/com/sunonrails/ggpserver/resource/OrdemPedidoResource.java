@@ -39,4 +39,9 @@ public class OrdemPedidoResource {
         return service.insert(pedido);
     }
 
+    @PutMapping
+    public OrdemPedido updateProdutos(@RequestBody OrdemPedido ped){
+        return service.updateList(ped);
+    }
+
 }
