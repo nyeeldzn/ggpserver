@@ -35,19 +35,19 @@ public class OrdemPedido implements Serializable {
 
     private String forma_pagamento;
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date entradaDate;
 
-    @Temporal(TemporalType.TIME)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date entradaHora;
 
-    @Temporal(TemporalType.TIME)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date triagemHora;
 
-    @Temporal(TemporalType.TIME)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date checkoutHora;
 
-    @Temporal(TemporalType.TIME)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date finalizadoHora;
 
     private String fonte_pedido;
@@ -97,7 +97,7 @@ public class OrdemPedido implements Serializable {
     public Date toDate(String sDate){
         Date date = null;
         try {
-            SimpleDateFormat fDate = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat fDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
             date = fDate.parse(sDate);
         }catch (ParseException pe){
             pe.printStackTrace();
@@ -108,7 +108,7 @@ public class OrdemPedido implements Serializable {
     public Date toTime(String sTime){
         Date time = null;
         try {
-            SimpleDateFormat fTime = new SimpleDateFormat("HH:mm:ss");
+            SimpleDateFormat fTime = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
             time = fTime.parse(sTime);
         }catch (ParseException pe){
             pe.printStackTrace();

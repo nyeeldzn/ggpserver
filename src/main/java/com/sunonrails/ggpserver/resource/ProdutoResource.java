@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Locale;
 
 @RestController
 @RequestMapping(value = "/produtos")
@@ -24,7 +25,8 @@ public class ProdutoResource {
 
     @RequestMapping(value = "/buscaPorNome", method = RequestMethod.POST)
     public List<Produto> findClientesByNome(@RequestBody Produto produto){
-        return service.findAllByName(produto.getNome());
+        System.out.println(produto.getNome().toUpperCase());
+        return service.findAllByName(produto.getNome().toUpperCase(Locale.ROOT));
     }
 
     @GetMapping

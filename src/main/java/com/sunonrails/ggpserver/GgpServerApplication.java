@@ -43,9 +43,9 @@ public class GgpServerApplication implements CommandLineRunner {
 
 		//Intanciando Produtos teste
 
-		Produto prod1 = new Produto(null, "Veja Multiuso");
-		Produto prod3 = new Produto(null, "Sabao em Po OMO");
-		Produto prod2 = new Produto(null, "Salgadinho Doritos");
+		Produto prod1 = new Produto(null, "VEJA MULTIUSO");
+		Produto prod3 = new Produto(null, "SABAO EM PO OMO");
+		Produto prod2 = new Produto(null, "SALGADINHO DORITOS");
 
 
 
@@ -94,16 +94,16 @@ public class GgpServerApplication implements CommandLineRunner {
 		usuarioService.insert(usr1);
 
 		//Instanciando pedidos de Teste
-		Date date;
-		Date time;
-		SimpleDateFormat fDate = new SimpleDateFormat("yyyy-MM-dd");
-		SimpleDateFormat fTime = new SimpleDateFormat("HH:mm:ss");
+		Date date = new Date();
+		Date time = new Date();
+		SimpleDateFormat fDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+		SimpleDateFormat fTime = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 
 		String sDate = "2021-12-31";
 		String sTime = "10:11:33";
 
-		date = fDate.parse(sDate);
-		time = fTime.parse(sTime);
+		//date = fDate.parse(sDate);
+		//time = fTime.parse(sTime);
 
 		OrdemPedido ped1 = new OrdemPedido(null,cli1,usr1,"William",
 				"DINHEIRO",
@@ -113,11 +113,11 @@ public class GgpServerApplication implements CommandLineRunner {
 		OrderProduct list2 = new OrderProduct(ped1, prod2, 1);
 		OrderProduct list3 = new OrderProduct(ped1, prod3, 4);
 
-		ped1.setEntradaDate(ped1.toDate(sDate));
-		ped1.setEntradaHora(ped1.toTime(sTime));
-		ped1.setTriagemHora(ped1.toTime(sTime));
-		ped1.setCheckoutHora(ped1.toTime(sTime));
-		ped1.setFinalizadoHora(ped1.toTime(sTime));
+		ped1.setEntradaDate(date);
+		ped1.setEntradaHora(time);
+		ped1.setTriagemHora(time);
+		ped1.setCheckoutHora(time);
+		ped1.setFinalizadoHora(time);
 		ped1.setOrderProducts(Arrays.asList(list1, list2,list3));
 
 

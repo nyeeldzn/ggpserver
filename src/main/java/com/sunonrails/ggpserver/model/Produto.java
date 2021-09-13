@@ -1,6 +1,7 @@
 package com.sunonrails.ggpserver.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Produto implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -31,7 +33,7 @@ public class Produto implements Serializable {
 
     public Produto(Long id, @NonNull String nome) {
         this.id = id;
-        this.nome = nome;
+        this.nome = nome.toUpperCase();
     }
 
     public Long getId() {
@@ -48,7 +50,7 @@ public class Produto implements Serializable {
     }
 
     public void setNome(@NonNull String nome) {
-        this.nome = nome;
+        this.nome = nome.toUpperCase();
     }
 
     @Override
