@@ -137,6 +137,7 @@ public class GgpServerApplication implements CommandLineRunner {
 		ped1.setEntradaHora(time);
 		ped1.setTriagemHora(time);
 		ped1.setCheckoutHora(time);
+		ped1.setEnviadoHora(time);
 		ped1.setFinalizadoHora(time);
 		ped1.setOrderProducts(Arrays.asList(list1, list2,list3));
 
@@ -144,30 +145,35 @@ public class GgpServerApplication implements CommandLineRunner {
 		ped2.setEntradaHora(time);
 		ped2.setTriagemHora(time);
 		ped2.setCheckoutHora(time);
+		ped2.setEnviadoHora(time);
 		ped2.setFinalizadoHora(time);
 
 		ped3.setEntradaDate(date);
 		ped3.setEntradaHora(time);
 		ped3.setTriagemHora(time);
 		ped3.setCheckoutHora(time);
+		ped3.setEnviadoHora(time);
 		ped3.setFinalizadoHora(time);
 
 		ped4.setEntradaDate(date);
 		ped4.setEntradaHora(time);
 		ped4.setTriagemHora(time);
 		ped4.setCheckoutHora(time);
+		ped4.setEnviadoHora(time);
 		ped4.setFinalizadoHora(time);
 
 		ped5.setEntradaDate(date);
 		ped5.setEntradaHora(time);
 		ped5.setTriagemHora(time);
 		ped5.setCheckoutHora(time);
+		ped5.setEnviadoHora(time);
 		ped5.setFinalizadoHora(time);
 
 		ped6.setEntradaDate(date);
 		ped6.setEntradaHora(time);
 		ped6.setTriagemHora(time);
 		ped6.setCheckoutHora(time);
+		ped6.setEnviadoHora(time);
 		ped6.setFinalizadoHora(time);
 
 

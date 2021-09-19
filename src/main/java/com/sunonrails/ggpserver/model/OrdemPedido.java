@@ -48,6 +48,9 @@ public class OrdemPedido implements Serializable {
     private Date checkoutHora;
 
     @Temporal(TemporalType.TIMESTAMP)
+    private Date enviadoHora;
+
+    @Temporal(TemporalType.TIMESTAMP)
     private Date finalizadoHora;
 
     private String fonte_pedido;
@@ -218,6 +221,14 @@ public class OrdemPedido implements Serializable {
 
     public void setCheckoutHora(Date checkoutHora) {
         this.checkoutHora = checkoutHora;
+    }
+
+    public Date getEnviadoHora() {
+        return enviadoHora;
+    }
+
+    public void setEnviadoHora(Date enviadoHora) {
+        this.enviadoHora = enviadoHora;
     }
 
     public Date getFinalizadoHora() {
