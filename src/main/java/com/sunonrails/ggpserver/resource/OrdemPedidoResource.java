@@ -26,6 +26,11 @@ public class OrdemPedidoResource {
         return service.find(id);
     }
 
+    @RequestMapping(value = "/buscaPorStatus/{status}", method = RequestMethod.GET)
+    public List<OrdemPedido> findByStatus(@PathVariable Integer status){
+        return service.findAllByStatus(status);
+    }
+
     @PostMapping
     public OrdemPedido insert(@RequestBody OrdemPedidoDTO pedidoDTO){
         OrdemPedido pedido = new OrdemPedido(pedidoDTO.getId(), pedidoDTO.getCliente(), pedidoDTO.getOperador(),

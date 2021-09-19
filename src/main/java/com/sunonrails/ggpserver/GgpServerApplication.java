@@ -109,6 +109,26 @@ public class GgpServerApplication implements CommandLineRunner {
 				"DINHEIRO",
 				"WHATSAPP","DAYANE",1);
 
+		OrdemPedido ped2 = new OrdemPedido(null,cli2,usr1,"William",
+				"DINHEIRO",
+				"WHATSAPP","DAYANE",2);
+
+		OrdemPedido ped3 = new OrdemPedido(null,cli3,usr1,"William",
+				"DINHEIRO",
+				"WHATSAPP","DAYANE",3);
+
+		OrdemPedido ped4 = new OrdemPedido(null,cli4,usr1,"William",
+				"DINHEIRO",
+				"WHATSAPP","DAYANE",3);
+
+		OrdemPedido ped5 = new OrdemPedido(null,cli2,usr1,"William",
+				"DINHEIRO",
+				"WHATSAPP","DAYANE",4);
+
+		OrdemPedido ped6 = new OrdemPedido(null,cli1,usr1,"William",
+				"DINHEIRO",
+				"WHATSAPP","DAYANE",5);
+
 		OrderProduct list1 = new OrderProduct(ped1, prod1, 3);
 		OrderProduct list2 = new OrderProduct(ped1, prod2, 1);
 		OrderProduct list3 = new OrderProduct(ped1, prod3, 4);
@@ -120,11 +140,49 @@ public class GgpServerApplication implements CommandLineRunner {
 		ped1.setFinalizadoHora(time);
 		ped1.setOrderProducts(Arrays.asList(list1, list2,list3));
 
+		ped2.setEntradaDate(date);
+		ped2.setEntradaHora(time);
+		ped2.setTriagemHora(time);
+		ped2.setCheckoutHora(time);
+		ped2.setFinalizadoHora(time);
+
+		ped3.setEntradaDate(date);
+		ped3.setEntradaHora(time);
+		ped3.setTriagemHora(time);
+		ped3.setCheckoutHora(time);
+		ped3.setFinalizadoHora(time);
+
+		ped4.setEntradaDate(date);
+		ped4.setEntradaHora(time);
+		ped4.setTriagemHora(time);
+		ped4.setCheckoutHora(time);
+		ped4.setFinalizadoHora(time);
+
+		ped5.setEntradaDate(date);
+		ped5.setEntradaHora(time);
+		ped5.setTriagemHora(time);
+		ped5.setCheckoutHora(time);
+		ped5.setFinalizadoHora(time);
+
+		ped6.setEntradaDate(date);
+		ped6.setEntradaHora(time);
+		ped6.setTriagemHora(time);
+		ped6.setCheckoutHora(time);
+		ped6.setFinalizadoHora(time);
+
 
 		ordemPedidoService.insert(ped1);
+		ordemPedidoService.insert(ped2);
+		ordemPedidoService.insert(ped3);
+		ordemPedidoService.insert(ped4);
+		ordemPedidoService.insert(ped5);
+		ordemPedidoService.insert(ped6);
+
+
 		orderProductService.insert(list1);
 		orderProductService.insert(list2);
 		orderProductService.insert(list3);
 
 	}
+
 }

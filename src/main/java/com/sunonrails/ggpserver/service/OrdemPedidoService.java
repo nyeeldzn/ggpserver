@@ -35,6 +35,10 @@ public class OrdemPedidoService {
         return repo.findAll();
     }
 
+    public List<OrdemPedido> findAllByStatus(int status){
+        return repo.findOrdemPedidoByStatus(status);
+    }
+
     public OrdemPedido insert(OrdemPedido pedido){
 
         return repo.save(pedido);
