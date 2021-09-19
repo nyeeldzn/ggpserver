@@ -1,6 +1,7 @@
 package com.sunonrails.ggpserver.resource;
 
 import com.sunonrails.ggpserver.model.Bairro;
+import com.sunonrails.ggpserver.model.Cliente;
 import com.sunonrails.ggpserver.model.OrderProduct;
 import com.sunonrails.ggpserver.service.BairroService;
 import com.sunonrails.ggpserver.service.OrderProductService;
@@ -26,9 +27,9 @@ public class OrderProductResource {
             return service.insert(orderProduct);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable Long id){
-        service.deleteById(id);
+    @RequestMapping(method = RequestMethod.DELETE)
+    public void delete(@RequestBody OrderProduct orderProduct){
+        service.deleteById(orderProduct.getId());
     }
 
 
