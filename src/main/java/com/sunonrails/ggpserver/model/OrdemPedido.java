@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "pedidos")
+@Table(name = "ORDEMPEDIDO")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class OrdemPedido implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -35,7 +35,7 @@ public class OrdemPedido implements Serializable {
 
     private String forma_pagamento;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date entradaDate;
 
     @Temporal(TemporalType.TIMESTAMP)

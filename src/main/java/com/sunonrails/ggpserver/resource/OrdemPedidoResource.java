@@ -1,6 +1,7 @@
 package com.sunonrails.ggpserver.resource;
 
 import com.sunonrails.ggpserver.dto.OrdemPedidoDTO;
+import com.sunonrails.ggpserver.model.DateBetweenHelper;
 import com.sunonrails.ggpserver.model.OrdemPedido;
 import com.sunonrails.ggpserver.repositories.OrdemPedidoRepository;
 import com.sunonrails.ggpserver.service.OrdemPedidoService;
@@ -29,6 +30,11 @@ public class OrdemPedidoResource {
     @RequestMapping(value = "/buscaPorStatus/{status}", method = RequestMethod.GET)
     public List<OrdemPedido> findByStatus(@PathVariable Integer status){
         return service.findAllByStatus(status);
+    }
+
+    @RequestMapping(value = "/buscaPorData", method = RequestMethod.POST)
+    public List<OrdemPedido> findByData(@RequestBody DateBetweenHelper dateBetweenHelper){
+        return service.findAllByDate(dateBetweenHelper.getDataInicial(), dateBetweenHelper.getDataFinal());
     }
 
     @PostMapping

@@ -11,6 +11,9 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import javax.swing.text.html.Option;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,6 +40,27 @@ public class OrdemPedidoService {
 
     public List<OrdemPedido> findAllByStatus(int status){
         return repo.findOrdemPedidoByStatus(status);
+    }
+
+    public List<OrdemPedido> findAllByDate(String dInicial, String dFinal){
+        //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date d1;
+        String ds1 = "";
+        String ds2 = "";
+        Date d2;
+        try{
+            d1 = new SimpleDateFormat("yyyy-MM-dd").parse(dInicial);
+            ds1  = new SimpleDateFormat("yyyy-MM-dd").format(d1);
+            System.out.println(ds1);
+            d2 = new SimpleDateFormat("yyyy-MM-dd").parse(dFinal);
+            ds2 = new SimpleDateFormat("yyyy-MM-dd").format(d2);
+            System.out.println(ds2);
+        }catch (ParseException pe){
+            pe.printStackTrace();
+        }
+        //return repo.findByEntradaDateGreaterThanAndEntradaDateLessThan(d1, d2);
+        return repo.getAllBetweenDates(ds1,ds2);
     }
 
     public OrdemPedido insert(OrdemPedido pedido){
