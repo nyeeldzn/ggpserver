@@ -37,6 +37,11 @@ public class OrdemPedidoResource {
         return service.findAllByDate(dateBetweenHelper.getDataInicial(), dateBetweenHelper.getDataFinal());
     }
 
+    @RequestMapping(value = "/buscaPorDataComStatus/{status}", method = RequestMethod.POST)
+    public List<OrdemPedido> findByDataComStatus(@RequestBody DateBetweenHelper dateBetweenHelper, @PathVariable Integer status){
+        return service.findAllByDateAndStatus(dateBetweenHelper.getDataInicial(), dateBetweenHelper.getDataFinal(), status);
+    }
+
     @PostMapping
     public OrdemPedido insert(@RequestBody OrdemPedidoDTO pedidoDTO){
         OrdemPedido pedido = new OrdemPedido(pedidoDTO.getId(), pedidoDTO.getCliente(), pedidoDTO.getOperador(),

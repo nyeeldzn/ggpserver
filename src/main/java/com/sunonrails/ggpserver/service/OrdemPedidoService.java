@@ -63,6 +63,28 @@ public class OrdemPedidoService {
         return repo.getAllBetweenDates(ds1,ds2);
     }
 
+    public List<OrdemPedido> findAllByDateAndStatus(String dInicial, String dFinal,Integer status){
+        //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date d1;
+        String ds1 = "";
+        String ds2 = "";
+        Date d2;
+        try{
+            d1 = new SimpleDateFormat("yyyy-MM-dd").parse(dInicial);
+            ds1  = new SimpleDateFormat("yyyy-MM-dd").format(d1);
+            System.out.println(ds1);
+            d2 = new SimpleDateFormat("yyyy-MM-dd").parse(dFinal);
+            ds2 = new SimpleDateFormat("yyyy-MM-dd").format(d2);
+            System.out.println(ds2);
+        }catch (ParseException pe){
+            pe.printStackTrace();
+        }
+        //return repo.findByEntradaDateGreaterThanAndEntradaDateLessThan(d1, d2);
+        return repo.getAllBetweenDatesWithStatus(ds1,ds2,status);
+    }
+
+
     public OrdemPedido insert(OrdemPedido pedido){
 
         return repo.save(pedido);

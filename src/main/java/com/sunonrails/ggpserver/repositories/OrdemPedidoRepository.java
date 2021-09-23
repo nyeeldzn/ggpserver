@@ -11,11 +11,14 @@ import java.util.List;
 public interface OrdemPedidoRepository extends JpaRepository<OrdemPedido, Long> {
     List<OrdemPedido> findOrdemPedidoByStatus(int status);
 
-    List<OrdemPedido> findByEntradaDateGreaterThanAndEntradaDateLessThan(Date dInicial, Date dFinal);
-
-    //@Query(value = "SELECT '*' FROM OrdemPedido where 'ENTRADA_DATE' BETWEEN :startDate AND  :endDate")
     @Query(
             value = "SELECT * FROM ORDEMPEDIDO WHERE ENTRADA_DATE BETWEEN :startDate AND :endDate",
             nativeQuery = true)
     List<OrdemPedido> getAllBetweenDates(@Param("startDate")String startDate, @Param("endDate")String endDate);
+
+    @Query(
+            value = "SELECT * FROM ORDEMPEDIDO WHERE STATUS = :status AND ENTRADA_DATE BETWEEN :startDate AND :endDate",
+            nativeQuery = true)
+    List<OrdemPedido> getAllBetweenDatesWithStatus(@Param("startDate")String startDate, @Param("endDate")String endDate, @Param("status")int status);
+
 }
