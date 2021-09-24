@@ -133,7 +133,7 @@ public class GgpServerApplication implements CommandLineRunner {
 		OrderProduct list2 = new OrderProduct(ped1, prod2, 1);
 		OrderProduct list3 = new OrderProduct(ped1, prod3, 4);
 
-		ped1.setEntradaDate(date);
+		ped1.setEntradaDate(sDate);
 		ped1.setEntradaHora(time);
 		ped1.setTriagemHora(time);
 		ped1.setCheckoutHora(time);
@@ -141,35 +141,35 @@ public class GgpServerApplication implements CommandLineRunner {
 		ped1.setFinalizadoHora(time);
 		ped1.setOrderProducts(Arrays.asList(list1, list2,list3));
 
-		ped2.setEntradaDate(date);
+		ped2.setEntradaDate(sDate);
 		ped2.setEntradaHora(time);
 		ped2.setTriagemHora(time);
 		ped2.setCheckoutHora(time);
 		ped2.setEnviadoHora(time);
 		ped2.setFinalizadoHora(time);
 
-		ped3.setEntradaDate(date);
+		ped3.setEntradaDate(sDate);
 		ped3.setEntradaHora(time);
 		ped3.setTriagemHora(time);
 		ped3.setCheckoutHora(time);
 		ped3.setEnviadoHora(time);
 		ped3.setFinalizadoHora(time);
 
-		ped4.setEntradaDate(date);
+		ped4.setEntradaDate(sDate);
 		ped4.setEntradaHora(time);
 		ped4.setTriagemHora(time);
 		ped4.setCheckoutHora(time);
 		ped4.setEnviadoHora(time);
 		ped4.setFinalizadoHora(time);
 
-		ped5.setEntradaDate(date);
+		ped5.setEntradaDate(sDate);
 		ped5.setEntradaHora(time);
 		ped5.setTriagemHora(time);
 		ped5.setCheckoutHora(time);
 		ped5.setEnviadoHora(time);
 		ped5.setFinalizadoHora(time);
 
-		ped6.setEntradaDate(date);
+		ped6.setEntradaDate(sDate);
 		ped6.setEntradaHora(time);
 		ped6.setTriagemHora(time);
 		ped6.setCheckoutHora(time);

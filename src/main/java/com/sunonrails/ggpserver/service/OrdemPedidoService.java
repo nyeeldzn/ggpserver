@@ -85,6 +85,48 @@ public class OrdemPedidoService {
     }
 
 
+    //Filtro Cliente
+    public List<OrdemPedido> findAllByDateFromClient(String dInicial, String dFinal, Long clienteId){
+        //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date d1;
+        String ds1 = "";
+        String ds2 = "";
+        Date d2;
+        try{
+            d1 = new SimpleDateFormat("yyyy-MM-dd").parse(dInicial);
+            ds1  = new SimpleDateFormat("yyyy-MM-dd").format(d1);
+            System.out.println(ds1);
+            d2 = new SimpleDateFormat("yyyy-MM-dd").parse(dFinal);
+            ds2 = new SimpleDateFormat("yyyy-MM-dd").format(d2);
+            System.out.println(ds2);
+        }catch (ParseException pe){
+            pe.printStackTrace();
+        }
+        return repo.getAllBetweenDatesFromClient(ds1,ds2, clienteId);
+    }
+
+    public List<OrdemPedido> findAllByDateAndStatusFromClient(String dInicial, String dFinal,Integer status, Long clienteId){
+        //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date d1;
+        String ds1 = "";
+        String ds2 = "";
+        Date d2;
+        try{
+            d1 = new SimpleDateFormat("yyyy-MM-dd").parse(dInicial);
+            ds1  = new SimpleDateFormat("yyyy-MM-dd").format(d1);
+            System.out.println(ds1);
+            d2 = new SimpleDateFormat("yyyy-MM-dd").parse(dFinal);
+            ds2 = new SimpleDateFormat("yyyy-MM-dd").format(d2);
+            System.out.println(ds2);
+        }catch (ParseException pe){
+            pe.printStackTrace();
+        }
+        return repo.getAllBetweenDatesWithStatusFromClient(ds1,ds2,status, clienteId);
+    }
+
+
     public OrdemPedido insert(OrdemPedido pedido){
 
         return repo.save(pedido);
@@ -96,8 +138,14 @@ public class OrdemPedidoService {
 
     public OrdemPedido updateList(OrdemPedido ped){
         OrdemPedido newObj = find(ped.getId());
+        System.out.println("Retorno da Busca: \n" + newObj);
         updateData(newObj, ped);
-        return repo.save(newObj);
+        System.out.println("Retorno do updateData: \n" + newObj);
+
+        OrdemPedido pedidoSalvo = repo.save(newObj);
+        System.out.println("Retorno do pedido Salvo: \n" + pedidoSalvo);
+        //return repo.save(newObj);
+        return pedidoSalvo;
     }
 
     private void updateData(OrdemPedido newObj, OrdemPedido obj){

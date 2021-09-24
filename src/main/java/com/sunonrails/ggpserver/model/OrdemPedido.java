@@ -35,8 +35,8 @@ public class OrdemPedido implements Serializable {
 
     private String forma_pagamento;
 
-    @Temporal(TemporalType.DATE)
-    private Date entradaDate;
+    //@Temporal(TemporalType.DATE)
+    private String entradaDate;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date entradaHora;
@@ -191,11 +191,22 @@ public class OrdemPedido implements Serializable {
         this.caixa_responsavel = caixa_responsavel;
     }
 
+    /*
     public Date getEntradaDate() {
         return entradaDate;
     }
 
     public void setEntradaDate(Date entradaDate) {
+        this.entradaDate = entradaDate;
+    }
+
+     */
+
+    public String getEntradaDate() {
+        return entradaDate;
+    }
+
+    public void setEntradaDate(String entradaDate) {
         this.entradaDate = entradaDate;
     }
 
@@ -237,6 +248,27 @@ public class OrdemPedido implements Serializable {
 
     public void setFinalizadoHora(Date finalizadoHora) {
         this.finalizadoHora = finalizadoHora;
+    }
+
+    @Override
+    public String toString() {
+        return "OrdemPedido{" +
+                "id=" + id +
+                ", cliente=" + cliente +
+                ", operador=" + operador +
+                ", entregador='" + entregador + '\'' +
+                ", forma_pagamento='" + forma_pagamento + '\'' +
+                ", entradaDate=" + entradaDate +
+                ", entradaHora=" + entradaHora +
+                ", triagemHora=" + triagemHora +
+                ", checkoutHora=" + checkoutHora +
+                ", enviadoHora=" + enviadoHora +
+                ", finalizadoHora=" + finalizadoHora +
+                ", fonte_pedido='" + fonte_pedido + '\'' +
+                ", caixa_responsavel='" + caixa_responsavel + '\'' +
+                ", status=" + status +
+                ", orderProducts=" + orderProducts +
+                '}';
     }
 
     @Override

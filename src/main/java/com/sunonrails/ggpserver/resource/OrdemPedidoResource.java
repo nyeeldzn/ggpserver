@@ -1,9 +1,8 @@
 package com.sunonrails.ggpserver.resource;
 
 import com.sunonrails.ggpserver.dto.OrdemPedidoDTO;
-import com.sunonrails.ggpserver.model.DateBetweenHelper;
+import com.sunonrails.ggpserver.model.PedidoFindJsonHelper;
 import com.sunonrails.ggpserver.model.OrdemPedido;
-import com.sunonrails.ggpserver.repositories.OrdemPedidoRepository;
 import com.sunonrails.ggpserver.service.OrdemPedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +21,7 @@ public class OrdemPedidoResource {
         return service.findAll();
     }
 
+    //EndPoint Pedidos
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public OrdemPedido find(@PathVariable Long id){
         return service.find(id);
@@ -33,13 +33,24 @@ public class OrdemPedidoResource {
     }
 
     @RequestMapping(value = "/buscaPorData", method = RequestMethod.POST)
-    public List<OrdemPedido> findByData(@RequestBody DateBetweenHelper dateBetweenHelper){
-        return service.findAllByDate(dateBetweenHelper.getDataInicial(), dateBetweenHelper.getDataFinal());
+    public List<OrdemPedido> findByData(@RequestBody PedidoFindJsonHelper pedidoFindJsonHelper){
+        return service.findAllByDate(pedidoFindJsonHelper.getDataInicial(), pedidoFindJsonHelper.getDataFinal());
     }
 
     @RequestMapping(value = "/buscaPorDataComStatus/{status}", method = RequestMethod.POST)
-    public List<OrdemPedido> findByDataComStatus(@RequestBody DateBetweenHelper dateBetweenHelper, @PathVariable Integer status){
-        return service.findAllByDateAndStatus(dateBetweenHelper.getDataInicial(), dateBetweenHelper.getDataFinal(), status);
+    public List<OrdemPedido> findByDataComStatus(@RequestBody PedidoFindJsonHelper pedidoFindJsonHelper, @PathVariable Integer status){
+        return service.findAllByDateAndStatus(pedidoFindJsonHelper.getDataInicial(), pedidoFindJsonHelper.getDataFinal(), status);
+    }
+
+    //EndPoint Filtro Pedidos-Cliente
+    @RequestMapping(value = "/buscaPorDataPorCliente", method = RequestMethod.POST)
+    public List<OrdemPedido> findByDataFromClient(@RequestBody PedidoFindJsonHelper pedidoFindJsonHelper){
+        return service.findAllByDateFromClient(pedidoFindJsonHelper.getDataInicial(), pedidoFindJsonHelper.getDataFinal(), pedidoFindJsonHelper.getCliente().getId());
+    }
+
+    @RequestMapping(value = "/buscaPorDataComStatusPorCliente/{status}", method = RequestMethod.POST)
+    public List<OrdemPedido> findByDataComStatusFromClient(@RequestBody PedidoFindJsonHelper pedidoFindJsonHelper, @PathVariable Integer status){
+        return service.findAllByDateAndStatusFromClient(pedidoFindJsonHelper.getDataInicial(), pedidoFindJsonHelper.getDataFinal(), status, pedidoFindJsonHelper.getCliente().getId());
     }
 
     @PostMapping
@@ -47,7 +58,7 @@ public class OrdemPedidoResource {
         OrdemPedido pedido = new OrdemPedido(pedidoDTO.getId(), pedidoDTO.getCliente(), pedidoDTO.getOperador(),
                 pedidoDTO.getEntregador(), pedidoDTO.getForma_pagamento(), pedidoDTO.getFonte_pedido(),
                 pedidoDTO.getCaixa_responsavel(), pedidoDTO.getStatus());
-        pedido.setEntradaDate(pedido.toDate(pedidoDTO.getEntradaDate()));
+        pedido.setEntradaDate(pedidoDTO.getEntradaDate());
         pedido.setEntradaHora(pedido.toTime(pedidoDTO.getEntradaHora()));
         pedido.setTriagemHora(pedido.toTime(pedidoDTO.getTriagemHora()));
         pedido.setCheckoutHora(pedido.toTime(pedidoDTO.getCheckoutHora()));
@@ -57,6 +68,7 @@ public class OrdemPedidoResource {
 
     @PutMapping
     public OrdemPedido updateProdutos(@RequestBody OrdemPedido ped){
+        System.out.println("Println Pedido \n" + ped);
         return service.updateList(ped);
     }
 
