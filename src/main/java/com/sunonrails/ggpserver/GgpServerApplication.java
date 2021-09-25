@@ -34,6 +34,12 @@ public class GgpServerApplication implements CommandLineRunner {
 	@Autowired
 	private OrderProductService orderProductService;
 
+	@Autowired
+	private ListaRupturaService listaRupturaService;
+
+	@Autowired
+	private RupturaProdutoService rupturaProdutoService;
+
 	public static void main(String[] args) {
 		SpringApplication.run(GgpServerApplication.class, args);
 	}
@@ -188,6 +194,18 @@ public class GgpServerApplication implements CommandLineRunner {
 		orderProductService.insert(list1);
 		orderProductService.insert(list2);
 		orderProductService.insert(list3);
+
+
+
+
+		//Teste Lista-Ruptura
+		ListaRuptura lista= new ListaRuptura(null, "Produtos de Teste");
+		listaRupturaService.insert(lista);
+		RupturaProduto rprod1 = new RupturaProduto(null, prod2, lista);
+		RupturaProduto rprod2 = new RupturaProduto(null, prod3, lista);
+		rupturaProdutoService.insert(rprod1);
+		rupturaProdutoService.insert(rprod2);
+
 
 	}
 
