@@ -20,12 +20,15 @@ public class ListaRupturaResource {
         return service.findAll();
     }
 
-    //EndPoint Pedidos
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ListaRuptura find(@PathVariable Long id){
         return service.find(id);
     }
 
+    @RequestMapping(value = "/buscaPorData", method = RequestMethod.POST)
+    public List<ListaRuptura> findAllByDate (@RequestBody PedidoFindJsonHelper dBH){
+        return service.findAllByDates(dBH.getDataInicial(), dBH.getDataFinal());
+    }
 
     @PostMapping
     public ListaRuptura insert(@RequestBody ListaRuptura pedido){
@@ -33,8 +36,8 @@ public class ListaRupturaResource {
     }
 
     @PutMapping
-    public ListaRuptura updateProdutos(@RequestBody ListaRuptura ped){
-        System.out.println("Println Pedido \n" + ped);
+    public ListaRuptura updateListaRuptura(@RequestBody ListaRuptura ped){
+        System.out.println("Println ListRuptura \n" + ped);
         return service.updateList(ped);
     }
 

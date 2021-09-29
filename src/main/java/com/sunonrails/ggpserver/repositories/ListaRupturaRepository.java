@@ -10,4 +10,9 @@ import java.util.List;
 
 public interface ListaRupturaRepository extends JpaRepository<ListaRuptura, Long> {
 
+    @Query(
+            value = "SELECT * FROM LISTA_RUPTURA WHERE DATE BETWEEN :startDate AND :endDate",
+            nativeQuery = true)
+    List<ListaRuptura> getAllBetweenDates(@Param("startDate")String startDate, @Param("endDate")String endDate);
+
 }

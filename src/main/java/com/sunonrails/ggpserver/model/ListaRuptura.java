@@ -1,7 +1,6 @@
 package com.sunonrails.ggpserver.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -16,6 +15,8 @@ public class ListaRuptura {
 
     private String desc;
 
+    private String date;
+
     @JsonManagedReference
     @OneToMany(mappedBy = "listaRuptura")
     @Valid
@@ -23,9 +24,10 @@ public class ListaRuptura {
 
     public ListaRuptura (){}
 
-    public ListaRuptura(Long id, String desc) {
+    public ListaRuptura(Long id, String desc, String date) {
         this.id = id;
         this.desc = desc;
+        this.date = date;
     }
 
     public Long getId() {
@@ -44,11 +46,29 @@ public class ListaRuptura {
         this.desc = desc;
     }
 
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     public List<RupturaProduto> getProdutoList() {
         return produtoList;
     }
 
     public void setProdutoList(List<RupturaProduto> produtoList) {
         this.produtoList = produtoList;
+    }
+
+    @Override
+    public String toString() {
+        return "ListaRuptura{" +
+                "id=" + id +
+                ", desc='" + desc + '\'' +
+                ", date='" + date + '\'' +
+                ", produtoList=" + produtoList +
+                '}';
     }
 }

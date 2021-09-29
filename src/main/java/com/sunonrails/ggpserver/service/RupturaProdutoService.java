@@ -33,7 +33,6 @@ public class RupturaProdutoService {
     }
 
     public RupturaProduto insert(RupturaProduto pedido){
-
         return repo.save(pedido);
     }
 

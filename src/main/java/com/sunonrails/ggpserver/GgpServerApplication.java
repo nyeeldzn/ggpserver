@@ -199,7 +199,7 @@ public class GgpServerApplication implements CommandLineRunner {
 
 
 		//Teste Lista-Ruptura
-		ListaRuptura lista= new ListaRuptura(null, "Produtos de Teste");
+		ListaRuptura lista= new ListaRuptura(null, "Produtos de Teste", "2021-09-25");
 		listaRupturaService.insert(lista);
 		RupturaProduto rprod1 = new RupturaProduto(null, prod2, lista);
 		RupturaProduto rprod2 = new RupturaProduto(null, prod3, lista);

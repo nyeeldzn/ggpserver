@@ -36,9 +36,11 @@ public class ListaRupturaService {
         return repo.findAll();
     }
 
+    public List<ListaRuptura> findAllByDates(String iDate, String fDate) {
+        return repo.getAllBetweenDates(iDate, fDate);
+    }
 
     public ListaRuptura insert(ListaRuptura pedido){
-
         return repo.save(pedido);
     }
 
@@ -62,6 +64,7 @@ public class ListaRupturaService {
         newObj.setDesc(obj.getDesc());
         List<RupturaProduto> newProdutoLista = rupturaService.insertList(obj.getProdutoList());
         newObj.setProdutoList(newProdutoLista);
+        newObj.setDate(obj.getDate());
     }
 
 

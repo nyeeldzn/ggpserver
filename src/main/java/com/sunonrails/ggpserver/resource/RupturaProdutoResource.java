@@ -20,11 +20,11 @@ public class RupturaProdutoResource {
         return service.findAll();
     }
 
-    //EndPoint Pedidos
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public RupturaProduto find(@PathVariable Long id){
         return service.find(id);
     }
+
 
 
     @PostMapping
