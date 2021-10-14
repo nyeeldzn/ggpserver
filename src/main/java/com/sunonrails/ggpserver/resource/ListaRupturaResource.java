@@ -4,6 +4,7 @@ import com.sunonrails.ggpserver.model.ListaRuptura;
 import com.sunonrails.ggpserver.model.PedidoFindJsonHelper;
 import com.sunonrails.ggpserver.service.ListaRupturaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,26 +17,31 @@ public class ListaRupturaResource {
     private ListaRupturaService service;
 
     @GetMapping
+    @PreAuthorize("hasAnyRole('user', 'admin')")
     public List<ListaRuptura> findAll(){
         return service.findAll();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @PreAuthorize("hasAnyRole('user', 'admin')")
     public ListaRuptura find(@PathVariable Long id){
         return service.find(id);
     }
 
     @RequestMapping(value = "/buscaPorData", method = RequestMethod.POST)
+    @PreAuthorize("hasAnyRole('user', 'admin')")
     public List<ListaRuptura> findAllByDate (@RequestBody PedidoFindJsonHelper dBH){
         return service.findAllByDates(dBH.getDataInicial(), dBH.getDataFinal());
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyRole('user', 'admin')")
     public ListaRuptura insert(@RequestBody ListaRuptura pedido){
         return service.insert(pedido);
     }
 
     @PutMapping
+    @PreAuthorize("hasAnyRole('user', 'admin')")
     public ListaRuptura updateListaRuptura(@RequestBody ListaRuptura ped){
         System.out.println("Println ListRuptura \n" + ped);
         return service.updateList(ped);

@@ -1,10 +1,12 @@
 package com.sunonrails.ggpserver.service;
 
 import com.sunonrails.ggpserver.exceptions.ObjectNotFoundException;
+import com.sunonrails.ggpserver.model.Account;
 import com.sunonrails.ggpserver.model.Cliente;
 import com.sunonrails.ggpserver.model.Usuario;
 import com.sunonrails.ggpserver.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -18,8 +20,15 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository repo;
 
+    @Autowired
+    private AccountService accountService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public Usuario find(Long id){
         Optional<Usuario> obj = repo.findById(id);
+        obj.get().setPass(null);
         return obj.orElseThrow( () -> new ObjectNotFoundException(
                 "Usuario de id: " + id + " nao encontrado!"
         ));
@@ -39,6 +48,8 @@ public class UsuarioService {
 
     @Transactional
     public Usuario insert (Usuario obj) {
+        obj.setPass(passwordEncoder.encode(obj.getPass()));
+        accountService.save(new Account(obj.getUsername(),obj.getPass(),obj.getPriv()));
         return repo.save(obj);
     }
 

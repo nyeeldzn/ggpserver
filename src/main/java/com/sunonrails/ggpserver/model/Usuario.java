@@ -12,16 +12,18 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String username;
-    private int priv;
+    private String pass;
+    private String priv;
 
     @OneToMany(mappedBy = "operador")
     private List<OrdemPedido> pedidos = new ArrayList<>();
 
     public Usuario () {}
 
-    public Usuario(Long id, String username, int priv) {
+    public Usuario(Long id, String username, String pass, String priv) {
         this.id = id;
         this.username = username;
+        this.pass = pass;
         this.priv = priv;
     }
 
@@ -41,11 +43,19 @@ public class Usuario {
         this.username = username;
     }
 
-    public int getPriv() {
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
+
+    public String getPriv() {
         return priv;
     }
 
-    public void setPriv(int priv) {
+    public void setPriv(String priv) {
         this.priv = priv;
     }
 

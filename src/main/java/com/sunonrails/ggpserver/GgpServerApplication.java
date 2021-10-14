@@ -1,12 +1,14 @@
 package com.sunonrails.ggpserver;
 
 import com.sunonrails.ggpserver.model.*;
+import com.sunonrails.ggpserver.repositories.AccountRepository;
 import com.sunonrails.ggpserver.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -94,10 +96,14 @@ public class GgpServerApplication implements CommandLineRunner {
 
 		//Instanciando Usuario de Teste
 
-		Usuario usr1 = new Usuario(null, "daniel", 1);
-		Usuario dev = new Usuario(null, "DEV", 1);
+		Usuario usr1 = new Usuario(null, "Visitante", "SunOnRails", "visitante");
+		Usuario usr2 = new Usuario(null, "Operador", "pass", "user");
+		Usuario dev = new Usuario(null, "DEV", "pass","admin");
 
 		usuarioService.insert(usr1);
+		usuarioService.insert(usr2);
+		usuarioService.insert(dev);;
+
 
 		//Instanciando pedidos de Teste
 		Date date = new Date();
