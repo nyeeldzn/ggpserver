@@ -22,7 +22,7 @@ public class Usuario {
 
     public Usuario(Long id, String username, String pass, String priv) {
         this.id = id;
-        this.username = username;
+        this.username = username.toUpperCase().trim();
         this.pass = pass;
         this.priv = priv;
     }
@@ -40,7 +40,7 @@ public class Usuario {
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        this.username = username.toUpperCase().trim();
     }
 
     public String getPass() {

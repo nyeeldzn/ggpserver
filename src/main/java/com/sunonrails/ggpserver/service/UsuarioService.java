@@ -34,6 +34,10 @@ public class UsuarioService {
         ));
     }
 
+    public Usuario findByUsername(String username){
+        return repo.findByUsername(username);
+    }
+
     public List<Usuario> findAll(){
         return repo.findAll();
     }
