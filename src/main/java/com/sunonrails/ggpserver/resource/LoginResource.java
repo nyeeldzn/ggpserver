@@ -22,7 +22,7 @@ public class LoginResource {
     @Autowired
     private UsuarioService userService;
 
-    @GetMapping
+    @PostMapping
     @PreAuthorize("hasAnyRole('visitante', 'user', 'admin')")
     public Usuario login(@RequestBody Usuario userLogin) {
         Usuario user;
