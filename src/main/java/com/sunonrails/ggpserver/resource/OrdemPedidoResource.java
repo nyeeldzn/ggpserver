@@ -18,51 +18,51 @@ public class OrdemPedidoResource {
     private OrdemPedidoService service;
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('visitante','user', 'admin')")
+    @PreAuthorize("hasAnyRole('visitante','Operador', 'Admin')")
     public List<OrdemPedido> findAll(){
         return service.findAll();
     }
 
     //EndPoint Pedidos
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    @PreAuthorize("hasAnyRole('visitante','user', 'admin')")
+    @PreAuthorize("hasAnyRole('visitante','Operador', 'Admin')")
     public OrdemPedido find(@PathVariable Long id){
         return service.find(id);
     }
 
     @RequestMapping(value = "/buscaPorStatus/{status}", method = RequestMethod.GET)
-    @PreAuthorize("hasAnyRole('user', 'admin')")
+    @PreAuthorize("hasAnyRole('Operador', 'Admin')")
     public List<OrdemPedido> findByStatus(@PathVariable Integer status){
         return service.findAllByStatus(status);
     }
 
     @RequestMapping(value = "/buscaPorData", method = RequestMethod.POST)
-    @PreAuthorize("hasAnyRole('user', 'admin')")
+    @PreAuthorize("hasAnyRole('Operador', 'Admin')")
     public List<OrdemPedido> findByData(@RequestBody PedidoFindJsonHelper pedidoFindJsonHelper){
         return service.findAllByDate(pedidoFindJsonHelper.getDataInicial(), pedidoFindJsonHelper.getDataFinal());
     }
 
     @RequestMapping(value = "/buscaPorDataComStatus/{status}", method = RequestMethod.POST)
-    @PreAuthorize("hasAnyRole('user', 'admin')")
+    @PreAuthorize("hasAnyRole('Operador', 'Admin')")
     public List<OrdemPedido> findByDataComStatus(@RequestBody PedidoFindJsonHelper pedidoFindJsonHelper, @PathVariable Integer status){
         return service.findAllByDateAndStatus(pedidoFindJsonHelper.getDataInicial(), pedidoFindJsonHelper.getDataFinal(), status);
     }
 
     //EndPoint Filtro Pedidos-Cliente
     @RequestMapping(value = "/buscaPorDataPorCliente", method = RequestMethod.POST)
-    @PreAuthorize("hasAnyRole('user', 'admin')")
+    @PreAuthorize("hasAnyRole('Operador', 'Admin')")
     public List<OrdemPedido> findByDataFromClient(@RequestBody PedidoFindJsonHelper pedidoFindJsonHelper){
         return service.findAllByDateFromClient(pedidoFindJsonHelper.getDataInicial(), pedidoFindJsonHelper.getDataFinal(), pedidoFindJsonHelper.getCliente().getId());
     }
 
     @RequestMapping(value = "/buscaPorDataComStatusPorCliente/{status}", method = RequestMethod.POST)
-    @PreAuthorize("hasAnyRole('user', 'admin')")
+    @PreAuthorize("hasAnyRole('Operador', 'Admin')")
     public List<OrdemPedido> findByDataComStatusFromClient(@RequestBody PedidoFindJsonHelper pedidoFindJsonHelper, @PathVariable Integer status){
         return service.findAllByDateAndStatusFromClient(pedidoFindJsonHelper.getDataInicial(), pedidoFindJsonHelper.getDataFinal(), status, pedidoFindJsonHelper.getCliente().getId());
     }
 
     @PostMapping
-    @PreAuthorize("hasAnyRole('user', 'admin')")
+    @PreAuthorize("hasAnyRole('Operador', 'Admin')")
     public OrdemPedido insert(@RequestBody OrdemPedidoDTO pedidoDTO){
         OrdemPedido pedido = new OrdemPedido(pedidoDTO.getId(), pedidoDTO.getCliente(), pedidoDTO.getOperador(),
                 pedidoDTO.getEntregador(), pedidoDTO.getForma_pagamento(), pedidoDTO.getFonte_pedido(),
@@ -76,7 +76,7 @@ public class OrdemPedidoResource {
     }
 
     @PutMapping
-    @PreAuthorize("hasAnyRole('user', 'admin')")
+    @PreAuthorize("hasAnyRole('Operador', 'Admin')")
     public OrdemPedido updateProdutos(@RequestBody OrdemPedido ped){
         System.out.println("Println Pedido \n" + ped);
         return service.updateList(ped);

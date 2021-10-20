@@ -62,9 +62,10 @@ public class GgpServerApplication implements CommandLineRunner {
 		PedidoProduto pedprod1 = new PedidoProduto(null, "Veja Multiuso");
 		PedidoProduto pedprod3 = new PedidoProduto(null, "Sabao em Po OMO");
 		PedidoProduto pedprod2 = new PedidoProduto(null, "Salgadinho Doritos");
-
-
 		 */
+
+
+
 		produtoService.insert(prod1);
 		produtoService.insert(prod2);
 		produtoService.insert(prod3);
@@ -74,8 +75,9 @@ public class GgpServerApplication implements CommandLineRunner {
 		pedidoProdutoService.insert(pedprod2);
 		pedidoProdutoService.insert(pedprod3);
 
-
 		 */
+
+
 
 		//Instanciando Bairros de Teste
 
@@ -96,9 +98,9 @@ public class GgpServerApplication implements CommandLineRunner {
 
 		//Instanciando Usuario de Teste
 
-		Usuario usr1 = new Usuario(null, "Visitante", "SunOnRails", "visitante");
-		Usuario usr2 = new Usuario(null, "Operador", "pass", "user");
-		Usuario dev = new Usuario(null, "DEV", "pass","admin");
+		Usuario usr1 = new Usuario(null, "Visitante", "SunOnRails", "Visitante");
+		Usuario usr2 = new Usuario(null, "Operador", "pass", "Operador");
+		Usuario dev = new Usuario(null, "DEV", "pass","Admin");
 
 		usuarioService.insert(usr1);
 		usuarioService.insert(usr2);

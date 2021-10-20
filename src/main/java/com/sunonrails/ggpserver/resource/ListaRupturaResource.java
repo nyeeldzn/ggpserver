@@ -17,31 +17,31 @@ public class ListaRupturaResource {
     private ListaRupturaService service;
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('user', 'admin')")
+    @PreAuthorize("hasAnyRole('Operador', 'Admin')")
     public List<ListaRuptura> findAll(){
         return service.findAll();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    @PreAuthorize("hasAnyRole('user', 'admin')")
+    @PreAuthorize("hasAnyRole('Operador', 'Admin')")
     public ListaRuptura find(@PathVariable Long id){
         return service.find(id);
     }
 
     @RequestMapping(value = "/buscaPorData", method = RequestMethod.POST)
-    @PreAuthorize("hasAnyRole('user', 'admin')")
+    @PreAuthorize("hasAnyRole('Operador', 'Admin')")
     public List<ListaRuptura> findAllByDate (@RequestBody PedidoFindJsonHelper dBH){
         return service.findAllByDates(dBH.getDataInicial(), dBH.getDataFinal());
     }
 
     @PostMapping
-    @PreAuthorize("hasAnyRole('user', 'admin')")
+    @PreAuthorize("hasAnyRole('Operador', 'Admin')")
     public ListaRuptura insert(@RequestBody ListaRuptura pedido){
         return service.insert(pedido);
     }
 
     @PutMapping
-    @PreAuthorize("hasAnyRole('user', 'admin')")
+    @PreAuthorize("hasAnyRole('Operador', 'Admin')")
     public ListaRuptura updateListaRuptura(@RequestBody ListaRuptura ped){
         System.out.println("Println ListRuptura \n" + ped);
         return service.updateList(ped);

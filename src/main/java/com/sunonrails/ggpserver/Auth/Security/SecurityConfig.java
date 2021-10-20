@@ -29,15 +29,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception{
         http
-                .authorizeRequests().antMatchers("/produtos").hasAnyRole("user", "admin")
+                .authorizeRequests().antMatchers("/produtos").hasAnyRole("Operador", "Admin")
                 .and()
-                .authorizeRequests().antMatchers("/clientes").hasAnyRole("user", "admin")
+                .authorizeRequests().antMatchers("/clientes").hasAnyRole("Operador", "Admin")
                 .and()
-                .authorizeRequests().antMatchers("/bairros").hasAnyRole("user", "admin")
+                .authorizeRequests().antMatchers("/bairros").hasAnyRole("Operador", "Admin")
                 .and()
-                .authorizeRequests().antMatchers("/pedidos").hasAnyRole("visitante","user", "admin")
+                .authorizeRequests().antMatchers("/pedidos").hasAnyRole("Visitante","Operador", "Admin")
                 .and()
-                .authorizeRequests().antMatchers("/listaRuptura/***").hasAnyRole("user", "admin")
+                .authorizeRequests().antMatchers("/listaRuptura/***").hasAnyRole("Operador", "Admin")
                 .and()
                 .httpBasic();
         http.csrf().disable().cors().disable();

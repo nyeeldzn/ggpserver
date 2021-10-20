@@ -23,7 +23,7 @@ public class LoginResource {
     private UsuarioService userService;
 
     @PostMapping
-    @PreAuthorize("hasAnyRole('visitante', 'user', 'admin')")
+    @PreAuthorize("hasAnyRole('Visitante', 'Operador', 'Admin')")
     public Usuario login(@RequestBody Usuario userLogin) {
         Usuario user;
         System.out.println("Usuario Logado: " + userLogin.getUsername());

@@ -25,25 +25,25 @@ public class UserResource {
     private UsuarioService service;
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('admin')")
+    @PreAuthorize("hasAnyRole('Admin')")
     public List<Usuario> findAll(){
         return service.findAll();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    @PreAuthorize("hasAnyRole('admin')")
+    @PreAuthorize("hasAnyRole('Admin')")
     public Usuario findById(@PathVariable Long id){
         return service.find(id);
     }
 
     @PostMapping
-    @PreAuthorize("hasAnyRole('admin')")
+    @PreAuthorize("hasAnyRole('Admin')")
     public Usuario insert(@RequestBody Usuario Usuario) {
             return service.insert(Usuario);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    @PreAuthorize("hasAnyRole('admin')")
+    @PreAuthorize("hasAnyRole('Admin')")
     public void delete(@PathVariable Long id){
         service.deleteById(id);
     }

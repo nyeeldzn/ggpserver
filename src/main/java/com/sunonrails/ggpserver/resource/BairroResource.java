@@ -18,31 +18,31 @@ public class BairroResource {
     private BairroService service;
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('user', 'admin')")
+    @PreAuthorize("hasAnyRole('Operador', 'Admin')")
     public List<Bairro> findAll(){
         return service.findAll();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    @PreAuthorize("hasAnyRole('user', 'admin')")
+    @PreAuthorize("hasAnyRole('Operador', 'Admin')")
     public Bairro findById(@PathVariable Long id){
         return service.find(id);
     }
 
     @PostMapping
-    @PreAuthorize("hasAnyRole('user', 'admin')")
+    @PreAuthorize("hasAnyRole('Operador', 'Admin')")
     public Bairro insert(@RequestBody Bairro bairro) {
             return service.insert(bairro);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    @PreAuthorize("hasAnyRole('admin')")
+    @PreAuthorize("hasAnyRole('Admin')")
     public void delete(@PathVariable Long id){
         service.deleteById(id);
     }
 
     @PutMapping
-    @PreAuthorize("hasAnyRole('user','admin')")
+    @PreAuthorize("hasAnyRole('Operador','Admin')")
     public void update(@RequestBody Bairro bairro){
         service.update(bairro);
     }

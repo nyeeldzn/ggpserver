@@ -17,25 +17,25 @@ public class ClienteResource {
     private ClienteService service;
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('user', 'admin')")
+    @PreAuthorize("hasAnyRole('Operador', 'Admin')")
     public List<Cliente> findAll(){
         return service.findAll();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    @PreAuthorize("hasAnyRole('user', 'admin')")
+    @PreAuthorize("hasAnyRole('Operador', 'Admin')")
     public Cliente findById(@PathVariable Long id){
         return service.find(id);
     }
 
     @RequestMapping(value = "/buscaPorNome", method = RequestMethod.POST)
-    @PreAuthorize("hasAnyRole('user', 'admin')")
+    @PreAuthorize("hasAnyRole('Operador', 'Admin')")
     public List<Cliente> findClientesByNome(@RequestBody Cliente cliente){
         return service.findAllByName(cliente.getNome());
     }
 
     @PostMapping
-    @PreAuthorize("hasAnyRole('user', 'admin')")
+    @PreAuthorize("hasAnyRole('Operador', 'Admin')")
     public Cliente insert(@RequestBody Cliente cliente) {
             return service.insert(cliente);
     }
@@ -47,7 +47,7 @@ public class ClienteResource {
     }
 
     @PutMapping
-    @PreAuthorize("hasAnyRole('user', 'admin')")
+    @PreAuthorize("hasAnyRole('Operador', 'Admin')")
     public void update(@RequestBody Cliente cliente){
         service.update(cliente);
     }

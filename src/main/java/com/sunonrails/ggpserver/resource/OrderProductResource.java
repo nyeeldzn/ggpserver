@@ -19,19 +19,19 @@ public class OrderProductResource {
     private OrderProductService service;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    @PreAuthorize("hasAnyRole('visitante','user','admin')")
+    @PreAuthorize("hasAnyRole('Visitante','Operador','Admin')")
     public OrderProduct findById(@PathVariable Long id){
         return service.find(id);
     }
 
     @PostMapping
-    @PreAuthorize("hasAnyRole('user','admin')")
+    @PreAuthorize("hasAnyRole('Operador','Admin')")
     public OrderProduct insert(@RequestBody OrderProduct orderProduct) {
             return service.insert(orderProduct);
     }
 
     @RequestMapping(method = RequestMethod.DELETE)
-    @PreAuthorize("hasAnyRole('user','admin')")
+    @PreAuthorize("hasAnyRole('Operador','Admin')")
     public void delete(@RequestBody OrderProduct orderProduct){
         service.deleteById(orderProduct.getId());
     }
