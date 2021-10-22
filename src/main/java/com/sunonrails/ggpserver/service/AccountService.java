@@ -18,4 +18,9 @@ public class AccountService {
     public Account save(Account user){
         return repo.save(user);
     }
+
+    @Transactional
+    public Account findByUsername(String username){
+        return repo.findOneByUsername(username);
+    }
 }

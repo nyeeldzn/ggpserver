@@ -2,6 +2,7 @@ package com.sunonrails.ggpserver.service;
 
 import com.sunonrails.ggpserver.exceptions.ObjectNotFoundException;
 import com.sunonrails.ggpserver.model.Account;
+import com.sunonrails.ggpserver.model.Bairro;
 import com.sunonrails.ggpserver.model.Cliente;
 import com.sunonrails.ggpserver.model.Usuario;
 import com.sunonrails.ggpserver.repositories.UsuarioRepository;
@@ -55,6 +56,25 @@ public class UsuarioService {
         obj.setPass(passwordEncoder.encode(obj.getPass()));
         accountService.save(new Account(obj.getUsername(),obj.getPass(),obj.getPriv()));
         return repo.save(obj);
+    }
+
+    public Usuario update(Usuario usr){
+        Account acc = accountService.findByUsername(usr.getUsername());
+        Usuario newObj = find(usr.getId());
+        updateData(newObj, usr);
+
+        acc.setUsername(newObj.getUsername());
+        acc.setPass(newObj.getPass());
+        acc.setRole(newObj.getPriv());
+
+        accountService.save(acc);
+        return repo.save(newObj);
+    }
+
+    private void updateData(Usuario newObj, Usuario obj){
+        newObj.setUsername(obj.getUsername());
+        newObj.setPass(obj.getPass());
+        newObj.setPriv(obj.getPriv());
     }
 
     public void deleteById(Long id) {

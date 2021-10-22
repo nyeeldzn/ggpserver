@@ -98,9 +98,9 @@ public class GgpServerApplication implements CommandLineRunner {
 
 		//Instanciando Usuario de Teste
 
-		Usuario usr1 = new Usuario(null, "Visitante", "SunOnRails", "Visitante");
-		Usuario usr2 = new Usuario(null, "Operador", "pass", "Operador");
-		Usuario dev = new Usuario(null, "DEV", "pass","Admin");
+		Usuario usr1 = new Usuario(null, "VISITANTE", "SUNONRAILS", "Visitante");
+		Usuario usr2 = new Usuario(null, "OPERADOR", "PASS", "Operador");
+		Usuario dev = new Usuario(null, "DEV", "PASS","Admin");
 
 		usuarioService.insert(usr1);
 		usuarioService.insert(usr2);

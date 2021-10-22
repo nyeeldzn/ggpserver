@@ -1,5 +1,6 @@
 package com.sunonrails.ggpserver.resource;
 
+import com.sunonrails.ggpserver.model.Cliente;
 import com.sunonrails.ggpserver.model.Usuario;
 import com.sunonrails.ggpserver.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,12 @@ public class UserResource {
     @PreAuthorize("hasAnyRole('Admin')")
     public Usuario insert(@RequestBody Usuario Usuario) {
             return service.insert(Usuario);
+    }
+
+    @PutMapping
+    @PreAuthorize("hasAnyRole('Admin')")
+    public void update(@RequestBody Usuario usr){
+        service.update(usr);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
