@@ -59,8 +59,9 @@ public class UsuarioService {
     }
 
     public Usuario update(Usuario usr){
-        Account acc = accountService.findByUsername(usr.getUsername());
+
         Usuario newObj = find(usr.getId());
+        Account acc = accountService.findByUsername(newObj.getUsername());
         updateData(newObj, usr);
 
         acc.setUsername(newObj.getUsername());
@@ -73,7 +74,7 @@ public class UsuarioService {
 
     private void updateData(Usuario newObj, Usuario obj){
         newObj.setUsername(obj.getUsername());
-        newObj.setPass(obj.getPass());
+        newObj.setPass(passwordEncoder.encode(obj.getPass()));
         newObj.setPriv(obj.getPriv());
     }
 
