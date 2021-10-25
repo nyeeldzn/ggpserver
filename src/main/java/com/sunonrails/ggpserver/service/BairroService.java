@@ -23,6 +23,15 @@ public class BairroService {
         ));
     }
 
+    public Boolean existsByNome(String nome){
+        Boolean exists = repo.existsBairroByNome(nome);
+        return exists;
+    }
+
+    public Bairro findByNome(String nome){
+       return repo.findByNome(nome);
+    }
+
     public List<Bairro> findAll(){
         return repo.findAll();
     }

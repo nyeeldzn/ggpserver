@@ -40,6 +40,13 @@ public class ClienteResource {
             return service.insert(cliente);
     }
 
+
+    @RequestMapping(value = "/inserirLista", method = RequestMethod.POST)
+    @PreAuthorize("hasAnyRole('Operador', 'Admin')")
+    public List<Cliente> insertList(@RequestBody List<Cliente> cliente) {
+        return service.insertList(cliente);
+    }
+
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @PreAuthorize("hasAnyRole('admin')")
     public void delete(@PathVariable Long id){

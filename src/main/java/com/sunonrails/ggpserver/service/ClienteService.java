@@ -1,6 +1,7 @@
 package com.sunonrails.ggpserver.service;
 
 import com.sunonrails.ggpserver.exceptions.ObjectNotFoundException;
+import com.sunonrails.ggpserver.model.Bairro;
 import com.sunonrails.ggpserver.model.Cliente;
 import com.sunonrails.ggpserver.model.Produto;
 import com.sunonrails.ggpserver.repositories.ClienteRepository;
@@ -17,6 +18,9 @@ public class ClienteService {
 
     @Autowired
     private ClienteRepository repo;
+
+    @Autowired
+    private BairroService bairroService;
 
     public Cliente find(Long id){
         Optional<Cliente> obj = repo.findById(id);
@@ -46,7 +50,21 @@ public class ClienteService {
     public List<Cliente> insertList(List<Cliente> list){
         List<Cliente> clientSaveCheck = new ArrayList<>();
         for(int i = 0; i<list.size(); i++){
-            clientSaveCheck.add(repo.save(list.get(i)));
+            Boolean checkBairro = bairroService.existsByNome(list.get(i).getBairro().getNome());
+            if(checkBairro){
+                System.out.println("Inserindo cliente: "+ list.get(i).getNome());
+                Cliente checkedCliente = list.get(i);
+                checkedCliente.setBairro(bairroService.findByNome(checkedCliente.getBairro().getNome()));
+                clientSaveCheck.add(repo.save(list.get(i)));
+            }else{
+                System.out.println("Bairro: "+ list.get(i).getBairro().getNome() + "Nao encontrado");
+                Cliente checkedCliente = list.get(i);
+                System.out.println("Criando Bairro: "+ list.get(i).getBairro().getNome());
+                checkedCliente.setBairro(bairroService.insert(new Bairro(null ,list.get(i).getBairro().getNome())));
+                clientSaveCheck.add(repo.save(checkedCliente));
+                System.out.println("Inserindo cliente: "+ checkedCliente.getNome());
+            }
+
         }
         return clientSaveCheck;
     }
